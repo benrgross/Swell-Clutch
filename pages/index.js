@@ -7,6 +7,9 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [session, loading] = useSession();
+  console.log(session);
+  if (session) {
+  }
   return (
     <div className={styles.container}>
       <Head>
@@ -25,7 +28,6 @@ export default function Home() {
           <>
             signed in as {session.user.email} <br />
             <div>You can now access swell Clutch</div>
-            <button onClick={signOut}>Sign Out</button>
           </>
         )}
       </main>
