@@ -13,33 +13,33 @@ const userSchema = new Schema({
     required: true,
     unique: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
+  //   password: {
+  //     type: String,
+  //     required: true,
+  //   },
   since: {
     type: Date,
     default: Date.now,
   },
 });
 
-userSchema.pre("save", async function (next) {
-  const user = this;
-  const hash = await bcrypt.hash(this.password, 10);
+// userSchema.pre("save", async function (next) {
+//   const user = this;
+//   const hash = await bcrypt.hash(this.password, 10);
 
-  this.password = hash;
-  next();
-});
+//   this.password = hash;
+//   next();
+// });
 
-userSchema.methods.isValidPassword = async function (password) {
-  const user = this;
-  const compare = await bcrypt.compare(password, user.password);
+// userSchema.methods.isValidPassword = async function (password) {
+//   const user = this;
+//   const compare = await bcrypt.compare(password, user.password);
 
-  return compare;
-};
+//   return compare;
+// };
 
-mongoose.models = {};
+// mongoose.models = {};
 
-const User = mongoose.model("User", userSchema);
+// const User = mongoose.model("User", userSchema);
 
-export default User;
+// export default User;
