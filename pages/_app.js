@@ -1,5 +1,6 @@
 import { Provider } from "next-auth/client";
 import Layout from "../compnents/Layout";
+import AuthLayout from "../compnents/AuthLayout";
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
