@@ -14,9 +14,14 @@ const Nav = () => {
         {!session ? (
           <Link href="/signIn">Sign In</Link>
         ) : (
-          <a onClick={signOut} style={{ cursor: "pointer" }}>
-            Log Out
-          </a>
+          <>
+            <Link style={{ margin: "5px, 15px" }} href="/Swell">
+              Swell
+            </Link>
+            <a onClick={signOut} style={{ cursor: "pointer" }}>
+              Log Out
+            </a>
+          </>
         )}
       </ul>
     </nav>

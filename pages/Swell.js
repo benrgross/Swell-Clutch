@@ -1,7 +1,14 @@
 import React from "react";
+import GetSwellBtn from "../components/GetSwellBtn";
+import { useStoreContext } from "../utils/GlobalState";
 
 function Swell() {
-  return <div></div>;
+  const [state, dispatch] = useStoreContext();
+  return (
+    <div>
+      <GetSwellBtn />
+    </div>
+  );
 }
 
 export default Swell;
