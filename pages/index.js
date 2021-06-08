@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Link from "next/link";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Head from "next/head";
@@ -7,6 +8,46 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [session, loading] = useSession();
+  const [lat, setLat] = useState(null);
+  const [lng, setLng] = useState(null);
+  const [status, setStatus] = useState(null);
+
+  useEffect(() => {
+    if (!navigator.geolocation) {
+      setStatus("Geolocation is not supported by your browser");
+    } else {
+      setStatus("Locating...");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setStatus(null);
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        },
+        () => {
+          setStatus("Unable to retrieve your location");
+        }
+      );
+    }
+  }, []);
+  const getLocation = () => {
+    if (!navigator.geolocation) {
+      setStatus("Geolocation is not supported by your browser");
+    } else {
+      setStatus("Locating...");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setStatus(null);
+          setLat(position.coords.latitude);
+          setLng(position.coords.longitude);
+        },
+        () => {
+          setStatus("Unable to retrieve your location");
+        }
+      );
+    }
+  };
+
+  console.log(lat, lng);
   console.log(session);
   if (session) {
   }
@@ -28,6 +69,8 @@ export default function Home() {
           <>
             signed in as {session.user.email} <br />
             <div>You can now access swell Clutch</div>
+            <div>{status}</div>
+            <button onClick={getLocation}>Get Location</button>
           </>
         )}
       </main>
