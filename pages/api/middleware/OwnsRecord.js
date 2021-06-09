@@ -1,4 +1,4 @@
-import auth0 from "../utils/auth0";
+// import auth0 from ""
 import { table } from "../utils/airtable.js";
 const ownsRecord = (handler) => async (req, res) => {
   const { user } = await auth0.getSession(req);
