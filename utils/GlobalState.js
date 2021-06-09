@@ -1,7 +1,12 @@
 import React, { useReducer, createContext, useContext } from "react";
 const StoreContext = createContext();
 const { Provider } = StoreContext;
-import { LOCATION_STATUS, SET_LOCATION, REGION } from "../utils/Actions";
+import {
+  LOCATION_STATUS,
+  SET_LOCATION,
+  REGION,
+  REGION2,
+} from "../utils/Actions";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -23,6 +28,11 @@ const reducer = (state, action) => {
         ...state,
         region: action.region,
       };
+    case REGION2:
+      return {
+        ...state,
+        region2: action.region,
+      };
     default:
       return state;
   }
@@ -39,6 +49,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     current_swell: {},
     swells: [],
     region: "select",
+    region2: "select",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

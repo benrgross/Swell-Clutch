@@ -1,16 +1,36 @@
 import React from "react";
 import { userStoreContext, useStoreContext } from "../utils/GlobalState";
+import { REGION2 } from "../utils/Actions";
 
-function SelectSubRegion1() {
+function selectSubRegion11() {
   const [state, dispatch] = useStoreContext();
+  const selectSubRegion1 = (e) => {
+    dispatch({
+      type: REGION2,
+      region: e.target.value,
+    });
+  };
 
   switch (state.region) {
+    case "select":
+      return (
+        <div>
+          <select
+            // value={state.region2}
+            onChange={(e) => selectSubRegion1(e)}
+            className="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example"
+          >
+            <option selected>Select Sub Region:</option>
+          </select>
+        </div>
+      );
     case "USA":
       return (
         <div>
           <select
-            value={state.subRegion1}
-            onChange={(e) => selectRegion(e)}
+            // value={state.region2}
+            onChange={(e) => selectSubRegion1(e)}
             className="form-select form-select-lg mb-3"
             aria-label=".form-select-lg example"
           >
@@ -27,7 +47,7 @@ function SelectSubRegion1() {
         <div>
           <select
             value={state.subRegion1}
-            onChange={(e) => selectRegion(e)}
+            onChange={(e) => selectSubRegion1(e)}
             className="form-select form-select-lg mb-3"
             aria-label=".form-select-lg example"
           >
@@ -43,7 +63,7 @@ function SelectSubRegion1() {
         <div>
           <select
             value={state.subRegion1}
-            onChange={(e) => selectRegion(e)}
+            onChange={(e) => selectSubRegion1(e)}
             className="form-select form-select-lg mb-3"
             aria-label=".form-select-lg example"
           >
@@ -57,7 +77,7 @@ function SelectSubRegion1() {
         <div>
           <select
             value={state.subRegion1}
-            onChange={(e) => selectRegion(e)}
+            onChange={(e) => selectSubRegion1(e)}
             className="form-select form-select-lg mb-3"
             aria-label=".form-select-lg example"
           >
@@ -65,10 +85,25 @@ function SelectSubRegion1() {
             <option value="North-West-Caribbean">North West Caribbean</option>
             <option value="Greater-Antilles">Greater Antilles</option>
             <option value="Leeward-Islands">Leeward Islands</option>
+            <option value="Windward-Islands">Windward Islands</option>
+            <option value="Leeward Antilles">Leeward Antilles</option>
+          </select>
+        </div>
+      );
+    default:
+      return (
+        <div>
+          <select
+            value={state.region2}
+            onChange={(e) => selectSubRegion1(e)}
+            className="form-select form-select-lg mb-3"
+            aria-label=".form-select-lg example"
+          >
+            <option selected>Select Sub Region:</option>
           </select>
         </div>
       );
   }
 }
 
-export default SelectSubRegion1;
+export default selectSubRegion11;

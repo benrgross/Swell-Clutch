@@ -60,8 +60,6 @@ export default function Home() {
   let timeStamp = date.toISOString();
   console.log(timeStamp);
 
-  console.log(lat, lng);
-
   if (session) {
   }
   return (
