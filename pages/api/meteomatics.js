@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const { data } = await axios.get(
-        `https://${username}:${password}@api.meteomatics.com/${timeStamp}/t_2m:C,max_individual_wave_height:m,mean_direction_total_swell:d/${lat},${lon}/json`
+        `https://${username}:${password}@api.meteomatics.com/${timeStamp}/t_2m:C,max_individual_wave_height:m,mean_direction_total_swell:d,mean_wave_period:s,significant_wave_height:m/40.369,73.703/html`
       );
 
       console.log(data.data);

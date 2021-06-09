@@ -7,3 +7,4 @@ export const SET_USER = "SET_USER";
 export const SET_TIMESTAMP = "SET_TIMESTAMP";
 export const LOADING = "LOADING";
 export const LOCATION_STATUS = "LOCATION_STATUS";
+export const REGION = "REGION";

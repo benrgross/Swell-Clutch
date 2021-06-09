@@ -1,12 +1,27 @@
 import React from "react";
+import { session, useSession } from "next-auth/client";
 import GetSwellBtn from "../components/GetSwellBtn";
+import SelectRegion from "../components/SelectRegion";
 import { useStoreContext } from "../utils/GlobalState";
+import Link from "next/link";
 
 function Swell() {
   const [state, dispatch] = useStoreContext();
+  const [session, loading] = useSession();
+
   return (
     <div>
-      <GetSwellBtn />
+      {!session ? (
+        <div>
+          <Link href="/">Please Sign In</Link>
+        </div>
+      ) : (
+        <>
+          {" "}
+          <GetSwellBtn /> <br />
+          <SelectRegion />{" "}
+        </>
+      )}
     </div>
   );
 }
