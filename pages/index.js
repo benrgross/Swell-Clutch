@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-
-import Link from "next/link";
+import { useStoreContext } from "../utils/GlobalState";
+import { SET_LOCATION, LOCATION_STATUS } from "../utils/Actions";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Head from "next/head";
 
@@ -10,21 +10,33 @@ export default function Home() {
   const [session, loading] = useSession();
   const [lat, setLat] = useState(null);
   const [lng, setLng] = useState(null);
-  const [status, setStatus] = useState(null);
+  const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
     if (!navigator.geolocation) {
-      setStatus("Geolocation is not supported by your browser");
+      dispatch({
+        type: LOCATION_STATUS,
+        status: "Geolocation is not supported by your browser",
+      });
     } else {
-      setStatus("Locating...");
+      dispatch({
+        type: LOCATION_STATUS,
+        status: "Locating...",
+      });
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setStatus(null);
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
+          dispatch({
+            type: SET_LOCATION,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
         },
         () => {
-          setStatus("Unable to retrieve your location");
+          dispatch({
+            type: LOCATION_STATUS,
+            status: "Unable to retrieve your location",
+          });
         }
       );
     }
@@ -46,9 +58,12 @@ export default function Home() {
       );
     }
   };
+  let date = new Date();
+  let timeStamp = date.toISOString();
+  console.log(timeStamp);
 
   console.log(lat, lng);
-  console.log(session);
+
   if (session) {
   }
   return (
