@@ -8,3 +8,5 @@ export const SET_TIMESTAMP = "SET_TIMESTAMP";
 export const LOADING = "LOADING";
 export const LOCATION_STATUS = "LOCATION_STATUS";
 export const REGION = "REGION";
+export const REGION2 = "REGION2";
+export const REGION3 = "REGION3";

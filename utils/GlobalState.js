@@ -6,6 +6,7 @@ import {
   SET_LOCATION,
   REGION,
   REGION2,
+  REGION3,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -33,6 +34,11 @@ const reducer = (state, action) => {
         ...state,
         region2: action.region,
       };
+    case REGION3:
+      return {
+        ...state,
+        region3: action.region,
+      };
     default:
       return state;
   }
@@ -50,6 +56,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     swells: [],
     region: "select",
     region2: "select",
+    region3: "select",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

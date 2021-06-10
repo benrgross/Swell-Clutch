@@ -21,11 +21,13 @@ function SelectRegion() {
         className="form-select form-select-lg mb-3"
         aria-label=".form-select-lg example"
       >
-        <option selected>Select Region:</option>
+        <option value="select" selected>
+          Select Region:
+        </option>
         <option value="USA">USA</option>
-        <option value="Mexico">Mexico</option>
+        {/* <option value="Mexico">Mexico</option>
         <option value="Central America">Central America</option>
-        <option value="Caribbean">Caribbean</option>
+        <option value="Caribbean">Caribbean</option> */}
       </select>
     </div>
   );
