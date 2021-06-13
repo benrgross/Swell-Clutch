@@ -1,4 +1,5 @@
 import React from "react";
+import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import { REGION3 } from "../utils/Actions";
 import axios from "axios";
@@ -13,13 +14,10 @@ function SelectSubregion2() {
     });
 
     const forcast = {
-      location: state.region3,
+      location: e.target.value,
     };
 
-    const { data } = await axios.post(
-      `http://localhost:3000/api/swellInfo`,
-      forcast
-    );
+    const { data } = await axios.post(`${server}/api/swellInfo`, forcast);
 
     console.log(data);
   };
