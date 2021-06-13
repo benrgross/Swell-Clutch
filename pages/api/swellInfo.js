@@ -12,22 +12,33 @@ export default async function handler(req, res) {
 
       const $ = cheerio.load(data);
 
-      $("div.graph-surf-data-point").each((i, element) => {
-        const wind = $(element).find(".surf-data-wind-data").text();
+      $("div.graph-surf-data-point,  #fcst-days > li:nth-child(1)").each(
+        (i, element) => {
+          const wind = $(element).find(".surf-data-wind-data").text();
 
-        const primarySwell = $(element).find(".surf-data-swell1").text();
+          const primarySwell = $(element).find(".surf-data-swell1").text();
 
-        //   .children(".swell-data-swell1")
-        //   .children("swell1")
-        //   .text();
+          const secondarySwell = $(element).find(".surf-data-swell2").text();
 
-        const secondarySwell = $(element).find(".surf-data-swell2").text();
+          const lowTide = $(element)
+            .find(".fcst-day-tide-low")
+            .children(".fcst-tide-lowhigh-data")
+            .text();
 
-        const tertiarySwell = $(element).find(".surf-data-swell3").text();
+          const am_pmLow = lowTide.split("ft");
 
-        const swell = { wind, primarySwell, secondarySwell, tertiarySwell };
-        results.push(swell);
-      });
+          const amLowTide = am_pmLow[0];
+          const pmLowTide = am_pmLow[1];
+
+          // const tertiarySwell = $(element).find(".surf-data-swell3").text();
+
+          const swell = { wind, primarySwell, secondarySwell, swell1 };
+          const tide = { amLowTide, pmLowTide };
+          if (swell.wind != "") results.push(swell);
+          else results.push(tide);
+        }
+      );
+
       res.json(results);
     } catch (error) {
       console.log(error);
