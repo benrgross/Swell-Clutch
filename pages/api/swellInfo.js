@@ -24,17 +24,37 @@ export default async function handler(req, res) {
             .find(".fcst-day-tide-low")
             .children(".fcst-tide-lowhigh-data")
             .text();
-
           const am_pmLow = lowTide.split("ft");
+          const am_low = am_pmLow[0];
+          const pm_low = am_pmLow[1];
 
-          const amLowTide = am_pmLow[0];
-          const pmLowTide = am_pmLow[1];
+          const highTide = $(element)
+            .find(".fcst-day-tide-high")
+            .children(".fcst-tide-lowhigh-data")
+            .text();
+          const am_pmHigh = highTide.split("ft");
+          const am_high = am_pmHigh[0];
+          const pm_high = am_pmHigh[1];
 
           // const tertiarySwell = $(element).find(".surf-data-swell3").text();
 
-          const swell = { wind, primarySwell, secondarySwell, swell1 };
-          const tide = { amLowTide, pmLowTide };
-          if (swell.wind != "") results.push(swell);
+          const swell = {
+            swell_current: { wind, primarySwell, secondarySwell },
+          };
+          const tide = {
+            tides_today: {
+              low: {
+                am_low,
+                pm_low,
+              },
+              high: {
+                am_high,
+                pm_high,
+              },
+            },
+          };
+
+          if (swell.swell_current.wind != "") results.push(swell);
           else results.push(tide);
         }
       );
