@@ -1,7 +1,7 @@
 import React from "react";
 import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
-import { REGION3 } from "../utils/Actions";
+import { REGION3, CURRENT_SWELL } from "../utils/Actions";
 import axios from "axios";
 
 function SelectSubregion2() {
@@ -19,7 +19,10 @@ function SelectSubregion2() {
 
     const { data } = await axios.post(`${server}/api/swellInfo`, forcast);
 
-    console.log(data);
+    dispatch({
+      type: CURRENT_SWELL,
+      currentSwell: data,
+    });
   };
 
   switch (state.region2) {

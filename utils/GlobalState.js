@@ -7,6 +7,8 @@ import {
   REGION,
   REGION2,
   REGION3,
+  SHOW_CURRENT_SWELL,
+  CURRENT_SWELL,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -39,6 +41,16 @@ const reducer = (state, action) => {
         ...state,
         region3: action.region,
       };
+    case REGION3:
+      return {
+        ...state,
+        show_current_swell: action.show_swell,
+      };
+    case CURRENT_SWELL:
+      return {
+        ...state,
+        current_swell: action.currentSwell,
+      };
     default:
       return state;
   }
@@ -52,8 +64,9 @@ const StoreProvider = ({ value = [], ...props }) => {
     },
     locationStatus: "",
     timeStamp: "",
-    current_swell: {},
+    current_swell: [{}, {}],
     swells: [],
+    show_current_swell: false,
     region: "select",
     region2: "select",
     region3: "select",

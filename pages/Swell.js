@@ -1,5 +1,6 @@
 import React from "react";
 import { session, useSession } from "next-auth/client";
+import CurrentSwell from "../components/CurrentSwell";
 import GetSwellBtn from "../components/GetSwellBtn";
 import SelectRegion from "../components/SelectRegion";
 import SelectSubRegion1 from "../components/SelectSubRegion1";
@@ -22,6 +23,7 @@ function Swell() {
           {" "}
           <GetSwellBtn /> <br />
           <SelectRegion /> <SelectSubRegion1 /> <SelectSubRegion2 />
+          <CurrentSwell />
         </>
       )}
     </div>
