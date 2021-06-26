@@ -8,8 +8,6 @@ import styles from "../styles/Home.module.css";
 
 export default function Home() {
   const [session, loading] = useSession();
-  const [lat, setLat] = useState(null);
-  const [lng, setLng] = useState(null);
   const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
@@ -61,8 +59,6 @@ export default function Home() {
   let date = new Date();
   let timeStamp = date.toISOString();
   console.log(timeStamp);
-
-  console.log(lat, lng);
 
   if (session) {
   }
