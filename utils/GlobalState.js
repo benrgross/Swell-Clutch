@@ -64,7 +64,24 @@ const StoreProvider = ({ value = [], ...props }) => {
     },
     locationStatus: "",
     timeStamp: "",
-    current_swell: [{}, {}],
+    current_swell: [
+      {
+        swell_current: {
+          wind: "",
+          primarySwell: "",
+          secondarySwell: "",
+        },
+      },
+      {
+        tides_today: {
+          low: {
+            am_low: "",
+            pm_low: "",
+          },
+          high: { am_high: "", pm_high: "" },
+        },
+      },
+    ],
     swells: [],
     show_current_swell: false,
     region: "select",

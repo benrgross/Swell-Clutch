@@ -13,6 +13,7 @@ function CurrentSwell() {
   return (
     <div>
       <p>{swell_current.wind}</p>
+      <p></p>
     </div>
   );
 }
