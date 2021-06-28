@@ -44,6 +44,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
+  Swell         Swell[]
 }
 
 model VerificationRequest {
@@ -55,4 +56,19 @@ model VerificationRequest {
   updatedAt  DateTime @updatedAt
 
   @@unique([identifier, token])
+}
+
+model Swell {
+  id             String   @id @default(cuid())
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  title          String   @db.VarChar(255)
+  notes          String   @db.VarChar(255)
+  location       String   @db.VarChar(255)
+  primarySwell   String   @db.VarChar(255)
+  secondarySwell String   @db.VarChar(255)
+  wind           String   @db.VarChar(255)
+  tide           String   @db.VarChar(255)
+  user           User     @relation(fields: [userId], references: [id])
+  userId         String
 }
