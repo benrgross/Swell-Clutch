@@ -12,8 +12,13 @@ function CurrentSwell() {
 
   return (
     <div>
-      <p>{swell_current.wind}</p>
-      <p></p>
+      <p>wind: {swell_current.wind}</p>
+      <p>primary swell: {swell_current.primarySwell}</p>
+      <p>secondary swell: {swell_current.secondarySwell}</p>
+      <p>am low tide: {tides_today.low.am_low}</p>
+      <p>pm low tide: {tides_today.low.pm_low}</p>
+      <p>am high tide: {tides_today.high.am_high}</p>
+      <p>pm high tide: {tides_today.high.pm_high}</p>
     </div>
   );
 }
