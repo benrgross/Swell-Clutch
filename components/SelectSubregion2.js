@@ -18,7 +18,7 @@ function SelectSubregion2() {
     };
 
     const { data } = await axios.post(`${server}/api/swellInfo`, forcast);
-
+    // resolve time and ft for tide here?
     dispatch({
       type: CURRENT_SWELL,
       currentSwell: data,
