@@ -9,6 +9,7 @@ import {
   REGION3,
   SHOW_CURRENT_SWELL,
   CURRENT_SWELL,
+  TIDE,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -49,7 +50,12 @@ const reducer = (state, action) => {
     case CURRENT_SWELL:
       return {
         ...state,
-        current_swell: action.currentSwell,
+        swell: action.currentSwell,
+      };
+    case TIDE:
+      return {
+        ...state,
+        currentTide: action.tide,
       };
     default:
       return state;
@@ -64,7 +70,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     },
     locationStatus: "",
     timeStamp: "",
-    current_swell: [
+    swell: [
       {
         swell_current: {
           wind: "",
@@ -87,6 +93,7 @@ const StoreProvider = ({ value = [], ...props }) => {
     region: "select",
     region2: "select",
     region3: "select",
+    currentTide: "",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

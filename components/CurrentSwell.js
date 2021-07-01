@@ -1,12 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { TIDE } from "../utils/Actions";
 import { useStoreContext } from "../utils/GlobalState";
 
 function CurrentSwell() {
   const [state, dispatch] = useStoreContext();
 
   const {
-    current_swell: [{ swell_current }, { tides_today }],
+    swell: [{ swell_current }, { tides_today }],
   } = state;
+
+  useEffect(() => {
+    if (swell_current.wind === "") {
+      dispatch({
+        type: TIDE,
+        tide: "select a surf spot",
+      });
+    } else {
+      let date = new Date("February 04, 2011 19:00:00");
+      let options = {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      };
+      let timeString = date.toLocaleString("en-US", options);
+      console.log(timeString);
+    }
+  }, [swell_current]);
 
   console.log("state", swell_current, tides_today);
 

@@ -11,3 +11,4 @@ export const LOCATION_STATUS = "LOCATION_STATUS";
 export const REGION = "REGION";
 export const REGION2 = "REGION2";
 export const REGION3 = "REGION3";
+export const TIDE = "TIDE";
