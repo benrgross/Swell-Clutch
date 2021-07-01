@@ -24,6 +24,7 @@ export default async function handler(req, res) {
             .find(".fcst-day-tide-low")
             .children(".fcst-tide-lowhigh-data")
             .text();
+          console.log(lowTide);
           const am_pmLow = lowTide.split("ft");
           const am_low = am_pmLow[0];
           const pm_low = am_pmLow[1];

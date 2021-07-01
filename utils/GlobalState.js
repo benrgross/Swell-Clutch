@@ -81,10 +81,17 @@ const StoreProvider = ({ value = [], ...props }) => {
       {
         tides_today: {
           low: {
-            am_low: "",
-            pm_low: "",
+            am_low_time: "",
+            am_low_ft: "",
+            pm_low_time: "",
+            pm_low_ft: "",
           },
-          high: { am_high: "", pm_high: "" },
+          high: {
+            am_high_time: "",
+            am_high_ft: "",
+            pm_high_time: "",
+            pm_high_ft: "",
+          },
         },
       },
     ],
