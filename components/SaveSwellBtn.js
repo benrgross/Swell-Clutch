@@ -10,6 +10,7 @@ function SaveSwellBtn() {
       wind: state.current_swell.wind,
       primarySwell: state.current_swell.primarySwell,
       secondarySwell: state.current_swell.secondarySwell,
+      // need to make algo to set current tide from time ranges
       tide,
     };
   };

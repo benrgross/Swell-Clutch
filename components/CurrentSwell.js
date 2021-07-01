@@ -16,6 +16,7 @@ function CurrentSwell() {
         tide: "select a surf spot",
       });
     } else {
+      // setting time to compare to tide chart
       let date = new Date("February 04, 2011 19:00:00");
       let options = {
         hour: "numeric",
@@ -24,6 +25,8 @@ function CurrentSwell() {
       };
       let timeString = date.toLocaleString("en-US", options);
       console.log(timeString);
+
+      // add algo to get current tide trend, add dispatch and set in state
     }
   }, [swell_current]);
 
