@@ -1,28 +1,14 @@
 import axios from "axios";
-const cheerio = require("cheerio");
 
 export default async function handler(req, res) {
   console.log("req.body", req.body);
   if (req.method === "POST") {
     try {
-      const results = [];
-      const { data } = await axios.get(`https://www.surfline.com/search/ven`);
+      const { data } = await axios.get(
+        `https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=${req.body.spotId}`
+      );
 
-      const $ = cheerio.load(data);
-
-      $("#surf-spots > div > div").each((i, element) => {
-        let href = $(element).children("a").attr("href");
-        let spotId = href.split("/")[5];
-        let name = $(element).find(".result__name").text();
-
-        const spot = {
-          name: name,
-          spotId: spotId,
-          href: href,
-        };
-        results.push(spot);
-      });
-      res.json(results);
+      res.json(data);
     } catch (error) {
       console.log(error);
     }

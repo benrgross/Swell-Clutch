@@ -18,7 +18,9 @@ function SelectSubregion2() {
       location: e.target.value,
     };
 
-    const { data } = await axios.post(`${server}/api/surfline`, forcast);
+    const { data } = await axios.post(`${server}/api/searchSpot`, forcast);
+
+    //TODO: make new companent for search with this api search and display results
     // resolve time and ft for tide here?
     console.log(data);
 
