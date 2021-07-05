@@ -19,6 +19,31 @@ function SelectSubregion2() {
 
     const { data } = await axios.post(`${server}/api/swellInfo`, forcast);
     // resolve time and ft for tide here?
+
+    const { low } = data[1].tides_today;
+    const { high } = data[1].tides_today;
+
+    const tide = {
+      low: {
+        am_low_time: low.am_low.substr(0, 8),
+        am_low_ft: low.am_low.substr(low.am_low.length - 4).replace(/\s+/g, ""),
+        pm_low_time: low.pm_low.substr(0, 8),
+        pm_low_ft: low.pm_low.substr(low.pm_low.length - 4).replace(/\s+/g, ""),
+      },
+      high: {
+        am_high_time: high.am_high.substr(0, 8),
+        am_high_ft: high.am_high
+          .substr(high.am_high.length - 4)
+          .replace(/\s+/g, ""),
+        pm_high_time: high.pm_high.substr(0, 8),
+        pm_high_ft: high.pm_high
+          .substr(high.pm_high.length - 4)
+          .replace(/\s+/g, ""),
+      },
+    };
+
+    console.log("tide", tide);
+
     dispatch({
       type: CURRENT_SWELL,
       currentSwell: data,

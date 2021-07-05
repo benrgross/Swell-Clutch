@@ -17,13 +17,13 @@ function CurrentSwell() {
       });
     } else {
       // setting time to compare to tide chart
-      let date = new Date("February 04, 2011 19:00:00");
+      let date = new Date();
       let options = {
         hour: "numeric",
         minute: "numeric",
         hour12: true,
       };
-      let timeString = date.toLocaleString("en-US", options);
+      let timeString = date.toLocaleString("en-US");
       console.log(timeString);
 
       // add algo to get current tide trend, add dispatch and set in state
