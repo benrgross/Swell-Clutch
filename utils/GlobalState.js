@@ -7,9 +7,7 @@ import {
   REGION,
   REGION2,
   REGION3,
-  SHOW_CURRENT_SWELL,
   CURRENT_SWELL,
-  TIDE,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -50,13 +48,10 @@ const reducer = (state, action) => {
     case CURRENT_SWELL:
       return {
         ...state,
+        tides: action.tides,
         swell: action.currentSwell,
       };
-    case TIDE:
-      return {
-        ...state,
-        currentTide: action.tide,
-      };
+
     default:
       return state;
   }
@@ -70,31 +65,29 @@ const StoreProvider = ({ value = [], ...props }) => {
     },
     locationStatus: "",
     timeStamp: "",
-    swell: [
-      {
-        swell_current: {
-          wind: "",
-          primarySwell: "",
-          secondarySwell: "",
-        },
+    swell: {
+      swell_current: {
+        wind: "",
+        primarySwell: "",
+        secondarySwell: "",
       },
-      {
-        tides_today: {
-          low: {
-            am_low_time: "",
-            am_low_ft: "",
-            pm_low_time: "",
-            pm_low_ft: "",
-          },
-          high: {
-            am_high_time: "",
-            am_high_ft: "",
-            pm_high_time: "",
-            pm_high_ft: "",
-          },
-        },
+    },
+
+    tides: {
+      low: {
+        am_low_time: "",
+        am_low_ft: "",
+        pm_low_time: "",
+        pm_low_ft: "",
       },
-    ],
+      high: {
+        am_high_time: "",
+        am_high_ft: "",
+        pm_high_time: "",
+        pm_high_ft: "",
+      },
+    },
+
     swells: [],
     show_current_swell: false,
     region: "select",

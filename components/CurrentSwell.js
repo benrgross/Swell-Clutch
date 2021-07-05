@@ -5,9 +5,9 @@ import { useStoreContext } from "../utils/GlobalState";
 function CurrentSwell() {
   const [state, dispatch] = useStoreContext();
 
-  const {
-    swell: [{ swell_current }, { tides_today }],
-  } = state;
+  const { swell_current } = state.swell;
+
+  const { tides } = state;
 
   useEffect(() => {
     if (swell_current.wind === "") {
@@ -30,20 +30,25 @@ function CurrentSwell() {
     }
   }, [swell_current]);
 
-  console.log("state", swell_current, tides_today);
+  console.log("state", swell_current, tides);
 
   return (
     <div>
       <p>wind: {swell_current.wind}</p>
       <p>primary swell: {swell_current.primarySwell}</p>
       <p>secondary swell: {swell_current.secondarySwell}</p>
-      <p>am low tide: {tides_today.low.am_low}</p>
-      <p>pm low tide: {tides_today.low.pm_low}</p>
       <p>
-        am high tide: {tides_today.high.am_high_time} @{" "}
-        {tides_today.high.am_high_ft}ft
+        am low tide: {tides.low.am_low_time} @ {tides.low.am_low_ft}ft
       </p>
-      <p>pm high tide: {tides_today.high.pm_high}</p>
+      <p>
+        pm low tide: {tides.low.pm_low_time} @ {tides.low.pm_low_ft}ft{" "}
+      </p>
+      <p>
+        am high tide: {tides.high.am_high_time} @ {tides.high.am_high_ft}ft
+      </p>
+      <p>
+        am high tide: {tides.high.pm_high_time} @ {tides.high.pm_high_ft}ft
+      </p>
     </div>
   );
 }
