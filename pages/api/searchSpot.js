@@ -6,7 +6,9 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const results = [];
-      const { data } = await axios.get(`https://www.surfline.com/search/ven`);
+      const { data } = await axios.get(
+        `https://www.surfline.com/search/${req.body.spot}`
+      );
 
       const $ = cheerio.load(data);
 

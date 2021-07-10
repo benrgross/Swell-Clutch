@@ -8,6 +8,7 @@ import {
   REGION2,
   REGION3,
   CURRENT_SWELL,
+  SEARCHSPOT,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -51,6 +52,11 @@ const reducer = (state, action) => {
         tides: action.tides,
         swell: action.currentSwell,
       };
+    case SEARCHSPOT:
+      return {
+        ...state,
+        searchSpots: action.spots,
+      };
 
     default:
       return state;
@@ -63,6 +69,7 @@ const StoreProvider = ({ value = [], ...props }) => {
       lon: 0,
       lat: 0,
     },
+    searchSpots: [],
     locationStatus: "",
     timeStamp: "",
     swell: {

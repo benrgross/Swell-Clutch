@@ -18,10 +18,10 @@ function SelectSubregion2() {
       location: e.target.value,
     };
 
-    const { data } = await axios.post(`${server}/api/searchSpot`, forcast);
+    const { data } = await axios.post(`${server}/api/swellinfo`, forcast);
 
     //TODO: make new companent for search with this api search and display results
-    // resolve time and ft for tide here?
+
     console.log(data);
 
     //   const { low } = data[1].tides_today;

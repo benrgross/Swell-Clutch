@@ -1,12 +1,27 @@
 import React, { useRef } from "react";
+import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
+import axios from "axios";
+import { SEARCHSPOT } from "../utils/Actions";
 
 function SearchForm() {
+  const [state, dispatch] = useStoreContext();
   const spotRef = useRef();
 
-  const searchSpot = (e) => {
+  const searchSpot = async (e) => {
     e.preventDefault();
-    console.log(spotRef.current.value);
+    const search = {
+      spot: spotRef.current.value,
+    };
+
+    const { data } = await axios.post(`${server}/api/searchSpot`, search);
+
+    dispatch({
+      type: SEARCHSPOT,
+      spots: data,
+    });
+
+    console.log(data);
   };
   return (
     <div>
