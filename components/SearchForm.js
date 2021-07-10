@@ -50,6 +50,7 @@ function SearchForm() {
           Submit
         </button>
       </form>
+      <br />
     </div>
   );
 }
