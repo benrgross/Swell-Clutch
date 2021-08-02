@@ -1,11 +1,11 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  console.log("req.body", req.body);
+  console.log("req.body", req.body.spotId);
   if (req.method === "POST") {
     try {
       const { data } = await axios.get(
-        `https://services.surfline.com/kbyg/spots/forecasts/wave?spotId=${req.body.spotId}`
+        `https://services.surfline.com/kbyg/spots/forecasts/tides?spotId=${req.body.spotId}`
       );
 
       res.json(data);

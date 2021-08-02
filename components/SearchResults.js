@@ -1,11 +1,23 @@
 import React from "react";
+import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
+import axios from "axios";
 
 function SearchResults() {
   const [state, dispatch] = useStoreContext();
-  const getSwell = (e) => {
-    const spotId = e.target.getAttribute("data-id");
-    console.log(spotId);
+  const getSwell = async (e) => {
+    const id = {
+      spotId: e.target.getAttribute("data-id"),
+    };
+
+    //make request for surfline
+    const swell = await axios.post(`${server}/api/swells`, id);
+    const tide = await axios.post(`${server}/api/tides`, id);
+
+    const tides = tide.data;
+    const swells = swell.data;
+
+    console.log("swells", swells, "tides", tides);
   };
   return (
     <div>
