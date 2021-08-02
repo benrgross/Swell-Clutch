@@ -18,6 +18,10 @@ function SearchResults() {
     const swells = swell.data;
 
     console.log("swells", swells, "tides", tides);
+
+    // match tide via time stamp
+    // match swell via time stamp
+    //send object to backend and store in db
   };
   return (
     <div>
