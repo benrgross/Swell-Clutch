@@ -17,17 +17,23 @@ function SearchResults() {
     const tide = await axios.post(`${server}/api/tides`, id);
 
     // slice data for only today
-    const tides = tide.data;
-    const swells = swell.data.data.wave.slice(0, 17);
-
-    // map unix time to hours
-    let newSwells = swells.map(function (wave) {
+    const tides = tide.data.data.tides.slice(0, 17).map(function (tides) {
+      let date = new Date(tides.timestamp * 1000);
+      tides.timestamp = date.getHours();
+      return tides;
+    });
+    const swells = swell.data.data.wave.slice(0, 17).map(function (wave) {
       let date = new Date(wave.timestamp * 1000);
       wave.timestamp = date.getHours();
       return wave;
     });
 
-    console.log("newSwell", newSwells);
+    // map unix time to hours
+    // let newSwells = swells.map(function (wave) {
+    //   let date = new Date(wave.timestamp * 1000);
+    //   wave.timestamp = date.getHours();
+    //   return wave;
+
     console.log("swells", swells);
     console.log("tides", tides);
 
