@@ -13,43 +13,45 @@ function SearchResults() {
 
     //make request for surfline
     const swell = await axios.post(`${server}/api/swells`, id);
+
     const tide = await axios.post(`${server}/api/tides`, id);
 
+    // slice data for only today
     const tides = tide.data;
-    const swells = swell.data;
+    const swells = swell.data.data.wave.slice(0, 17);
 
-    let newSwells = swells.data.wave.map(function (wave) {
+    // map unix time to hours
+    let newSwells = swells.map(function (wave) {
       let date = new Date(wave.timestamp * 1000);
-      wave.timestamp = date.toISOString();
+      wave.timestamp = date.getHours();
       return wave;
     });
 
     console.log("newSwell", newSwells);
     console.log("swells", swells);
     console.log("tides", tides);
-    console.log(swells.data.wave.length);
 
     let date = new Date().getTime();
     let timeStamp = Math.round(date / 1000 / 60 / 30) * 30 * 60 * 1000;
 
-    for (let i = 0; i < swells.data.wave.length; i++) {
-      for (let j = i + 1; j < swells.data.wave.length; j++) {
-        // console.log("time1", swells.data.wave[i].timestamp);
-        // // console.log("timestamp", timeStamp);
-        // // console.log("time2", swells.data.wave[j].timestamp);
-        if (
-          timeStamp >= swells.data.wave[i].timestamp &&
-          timeStamp <= swells.data.wave[j].timestamp
-        ) {
-          console.log(
-            "test",
-            swells.data.wave[i].timestamp,
-            swells.data.wave[j].timestamp,
-            timeStamp
-          );
-        }
-      }
-    }
+    // for (let i = 0; i < swells.data.wave.length; i++) {
+    //   for (let j = i + 1; j < swells.data.wave.length; j++) {
+    //     // console.log("time1", swells.data.wave[i].timestamp);
+    //     // // console.log("timestamp", timeStamp);
+    //     // // console.log("time2", swells.data.wave[j].timestamp);
+    //     if (
+    //       timeStamp >= swells.data.wave[i].timestamp &&
+    //       timeStamp <= swells.data.wave[j].timestamp
+    //     ) {
+    //       console.log(
+    //         "test",
+    //         swells.data.wave[i].timestamp,
+    //         swells.data.wave[j].timestamp,
+    //         timeStamp
+    //       );
+    //     }
+    //   }
+    // }
     console.log(timeStamp);
 
     // match tide via time stamp
