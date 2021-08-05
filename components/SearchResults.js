@@ -2,6 +2,7 @@ import React from "react";
 import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import axios from "axios";
+import { SimpleConsoleLogger, UsingJoinColumnIsNotAllowedError } from "typeorm";
 
 function SearchResults() {
   const [state, dispatch] = useStoreContext();
@@ -17,7 +18,39 @@ function SearchResults() {
     const tides = tide.data;
     const swells = swell.data;
 
-    console.log("swells", swells, "tides", tides);
+    let newSwells = swells.data.wave.map(function (wave) {
+      let date = new Date(wave.timestamp * 1000);
+      wave.timestamp = date.toISOString();
+      return wave;
+    });
+
+    console.log("newSwell", newSwells);
+    console.log("swells", swells);
+    console.log("tides", tides);
+    console.log(swells.data.wave.length);
+
+    let date = new Date().getTime();
+    let timeStamp = Math.round(date / 1000 / 60 / 30) * 30 * 60 * 1000;
+
+    for (let i = 0; i < swells.data.wave.length; i++) {
+      for (let j = i + 1; j < swells.data.wave.length; j++) {
+        // console.log("time1", swells.data.wave[i].timestamp);
+        // // console.log("timestamp", timeStamp);
+        // // console.log("time2", swells.data.wave[j].timestamp);
+        if (
+          timeStamp >= swells.data.wave[i].timestamp &&
+          timeStamp <= swells.data.wave[j].timestamp
+        ) {
+          console.log(
+            "test",
+            swells.data.wave[i].timestamp,
+            swells.data.wave[j].timestamp,
+            timeStamp
+          );
+        }
+      }
+    }
+    console.log(timeStamp);
 
     // match tide via time stamp
     // match swell via time stamp

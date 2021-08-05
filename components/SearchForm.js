@@ -28,9 +28,7 @@ function SearchForm() {
       {" "}
       <form>
         <div className="mb-3">
-          <label for="exampleSpot" className="form-label">
-            Surf Spot
-          </label>
+          <label className="form-label">Surf Spot</label>
           <input
             ref={spotRef}
             type="email"
