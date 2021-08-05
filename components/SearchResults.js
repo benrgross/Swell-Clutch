@@ -37,15 +37,30 @@ function SearchResults() {
     // let userTime = 13;
     console.log(userTime);
 
-    let currentSwell;
+    let currentSwell = {
+      swells: [],
+      surf: {},
+    };
     for (let i = 0; i < swells.length; i++) {
       if (userTime === swells[i].timestamp) {
-        currentSwell = swells[i];
+        currentSwell.swells = swells[i].swells.filter(
+          (swell) => swell.height !== 0
+        );
       } else if (userTime > 16) {
-        currentSwell = swells[16];
+        currentSwell.swells = swells[16].swells.filter(
+          (swell) => swell.height !== 0
+        );
+
+        currentSwell.surf = swells[16].surf;
       } else if (userTime < 3) {
-        currentSwell = swells[0];
+        currentSwell.swells = swells[0].swells.filter(
+          (swell) => swell.height !== 0
+        );
+
+        currentSwell.surf = swells[0].surf;
       }
+
+      currentSwell.swells.sort((a, b) => b.height - a.height);
     }
     console.log("currentSwell", currentSwell);
 
