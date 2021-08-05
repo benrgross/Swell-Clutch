@@ -37,37 +37,38 @@ function SearchResults() {
     // let userTime = 13;
     console.log(userTime);
 
-    let currentSwell = {
+    let swellObject = {
       swells: [],
       surf: {},
+      currentTide: {
+        height: 0,
+        status: "null",
+      },
     };
+
     for (let i = 0; i < swells.length; i++) {
       if (userTime === swells[i].timestamp) {
-        currentSwell.swells = swells[i].swells.filter(
+        swellObject.swells = swells[i].swells.filter(
           (swell) => swell.height !== 0
         );
       } else if (userTime > 16) {
-        currentSwell.swells = swells[16].swells.filter(
+        swellObject.swells = swells[16].swells.filter(
           (swell) => swell.height !== 0
         );
 
-        currentSwell.surf = swells[16].surf;
+        swellObject.surf = swells[16].surf;
       } else if (userTime < 3) {
-        currentSwell.swells = swells[0].swells.filter(
+        swellObject.swells = swells[0].swells.filter(
           (swell) => swell.height !== 0
         );
 
-        currentSwell.surf = swells[0].surf;
+        swellObject.surf = swells[0].surf;
       }
 
-      currentSwell.swells.sort((a, b) => b.height - a.height);
+      swellObject.swells.sort((a, b) => b.height - a.height);
     }
-    console.log("currentSwell", currentSwell);
 
-    const currentTide = {
-      height: 0,
-      status: "null",
-    };
+    let { currentTide } = swellObject;
 
     // FIX TIDE BUG TO REFLECT HIGH OR LOW TIDE WHEN TIMESTAMPS MATCH
     for (let i = 0; i < tides.length; i++) {
@@ -110,10 +111,9 @@ function SearchResults() {
       else if (tides[i].type === "LOW") currentTide.status === "low";
     }
 
-    console.log(currentTide);
+    console.log(swellObject);
 
-    // match swell via time stamp
-    //send object to backend and store in db
+    // Add wind to swell object, then it is ready to send to backend
   };
   return (
     <div>
