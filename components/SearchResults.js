@@ -37,28 +37,15 @@ function SearchResults() {
     console.log("swells", swells);
     console.log("tides", tides);
 
-    let date = new Date().getTime();
-    let timeStamp = Math.round(date / 1000 / 60 / 30) * 30 * 60 * 1000;
+    // let userTime = new Date().getHours();
+    let userTime = 13;
+    console.log(userTime);
 
-    // for (let i = 0; i < swells.data.wave.length; i++) {
-    //   for (let j = i + 1; j < swells.data.wave.length; j++) {
-    //     // console.log("time1", swells.data.wave[i].timestamp);
-    //     // // console.log("timestamp", timeStamp);
-    //     // // console.log("time2", swells.data.wave[j].timestamp);
-    //     if (
-    //       timeStamp >= swells.data.wave[i].timestamp &&
-    //       timeStamp <= swells.data.wave[j].timestamp
-    //     ) {
-    //       console.log(
-    //         "test",
-    //         swells.data.wave[i].timestamp,
-    //         swells.data.wave[j].timestamp,
-    //         timeStamp
-    //       );
-    //     }
-    //   }
-    // }
-    console.log(timeStamp);
+    for (let i = 0; i < swells.length; i++) {
+      if (userTime === swells[i].timestamp) {
+        console.log("test", swells[i]);
+      }
+    }
 
     // match tide via time stamp
     // match swell via time stamp
