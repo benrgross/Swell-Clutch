@@ -16,6 +16,8 @@ function SearchResults() {
 
     const tide = await axios.post(`${server}/api/tides`, id);
 
+    const wind = await axios.post(`${server}/api/winds`, id);
+
     // slice data for only today
     // map unix time to hours
     const tides = tide.data.data.tides.slice(0, 25).map(function (tides) {
@@ -29,17 +31,23 @@ function SearchResults() {
       return wave;
     });
 
+    const winds = wind.data.data.wind.slice(0, 17).map(function (wind) {
+      let date = new Date(wind.timestamp * 1000);
+      wind.timestamp = date.getHours();
+      return wind;
+    });
+
+    console.log("winds", winds);
     console.log("swells", swells);
     console.log("tides", tides);
 
     // get the users time
     let userTime = new Date().getHours();
-    // let userTime = 13;
-    console.log(userTime);
 
     let swellObject = {
       swells: [],
       surf: {},
+      currentWind: {},
       currentTide: {
         height: 0,
         status: "null",
@@ -51,6 +59,7 @@ function SearchResults() {
         swellObject.swells = swells[i].swells.filter(
           (swell) => swell.height !== 0
         );
+        swellObject.surf = swells[i].surf;
       } else if (userTime > 16) {
         swellObject.swells = swells[16].swells.filter(
           (swell) => swell.height !== 0
@@ -66,6 +75,18 @@ function SearchResults() {
       }
 
       swellObject.swells.sort((a, b) => b.height - a.height);
+    }
+
+    for (let i = 0; i < winds.length; i++) {
+      if (userTime === winds[i].timestamp) {
+        swellObject.currentWind = winds[i];
+      } else if (userTime > 16) {
+        swellObject.currentWind = winds[16];
+
+        swellObject.currentWind = winds[16];
+      } else if (userTime < 3) {
+        swellObject.currentWind = winds[0];
+      }
     }
 
     let { currentTide } = swellObject;
@@ -124,6 +145,7 @@ function SearchResults() {
               <p className="spot-results">
                 {" "}
                 <span
+                  key={spot.id}
                   style={{ cursor: "pointer", color: "blue" }}
                   onClick={(e) => getSwell(e)}
                   data-id={spot.spotId}

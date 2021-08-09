@@ -39,23 +39,37 @@ export default function Home() {
       );
     }
   }, []);
+
   const getLocation = () => {
     if (!navigator.geolocation) {
-      setStatus("Geolocation is not supported by your browser");
+      dispatch({
+        type: LOCATION_STATUS,
+        status: "Geolocation is not supported by your browser",
+      });
     } else {
-      setStatus("Locating...");
+      dispatch({
+        type: LOCATION_STATUS,
+        status: "Locating...",
+      });
+
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          setStatus(null);
-          setLat(position.coords.latitude);
-          setLng(position.coords.longitude);
+          dispatch({
+            type: SET_LOCATION,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          });
         },
         () => {
-          setStatus("Unable to retrieve your location");
+          dispatch({
+            type: LOCATION_STATUS,
+            status: "Unable to retrieve your location",
+          });
         }
       );
     }
   };
+
   let date = new Date();
   let timeStamp = date.toISOString();
   console.log(timeStamp);
