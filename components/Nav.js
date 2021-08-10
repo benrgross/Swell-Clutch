@@ -16,15 +16,16 @@ const Nav = () => {
         ) : (
           <>
             <li>
-              <Link style={{ margin: "5px, 15px" }} href="/Swell">
-                Swell
-              </Link>
-            </li>
-            <li>
               <Link style={{ margin: "5px, 15px" }} href="/Search">
                 Search
               </Link>
             </li>
+            <li>
+              <Link style={{ margin: "5px, 15px" }} href="/Swell">
+                Swell
+              </Link>
+            </li>
+
             <li>
               <a onClick={signOut} style={{ cursor: "pointer" }}>
                 Log Out

@@ -21,9 +21,6 @@ function Swell() {
         </div>
       ) : (
         <>
-          {" "}
-          <GetSwellBtn /> <br />
-          <SelectRegion /> <SelectSubRegion1 /> <SelectSubRegion2 />
           <CurrentSwell />
           <SaveSwellBtn />
         </>

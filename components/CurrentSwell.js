@@ -9,46 +9,66 @@ function CurrentSwell() {
 
   const { tides } = state;
 
-  useEffect(() => {
-    if (swell_current.wind === "") {
-      dispatch({
-        type: TIDE,
-        tide: "select a surf spot",
-      });
-    } else {
-      // setting time to compare to tide chart
-      let date = new Date();
-      let options = {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      };
-      let timeString = date.toLocaleString("en-US");
-      console.log(timeString);
+  const direction = (direction) => {
+    console.log(Math.round(direction));
+    let x = Number(Math.round(direction) / 22.5 + 0.5);
+    console.log(x);
+    let arr = [
+      "N",
+      "NNE",
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE",
+      "SSE",
+      "S",
+      "SSW",
+      "SW",
+      "WSW",
+      "W",
+      "WNW",
+      "NW",
+      "NNW",
+    ];
+    let genDirrection = arr[Math.round(x % 16)];
 
-      // add algo to get current tide trend, add dispatch and set in state
-    }
-  }, [swell_current]);
+    return genDirrection;
+  };
 
-  console.log("state", swell_current, tides);
+  const surfScore = (surfMax, surfMin) => {
+    const averageSurf = (surfMax + surfMin) / 2;
+
+    return averageSurf;
+  };
 
   return (
-    <div>
-      <p>wind: {swell_current.wind}</p>
-      <p>primary swell: {swell_current.primarySwell}</p>
-      <p>secondary swell: {swell_current.secondarySwell}</p>
-      <p>
-        am low tide: {tides.low.am_low_time} @ {tides.low.am_low_ft}ft
-      </p>
-      <p>
-        pm low tide: {tides.low.pm_low_time} @ {tides.low.pm_low_ft}ft{" "}
-      </p>
-      <p>
-        am high tide: {tides.high.am_high_time} @ {tides.high.am_high_ft}ft
-      </p>
-      <p>
-        am high tide: {tides.high.pm_high_time} @ {tides.high.pm_high_ft}ft
-      </p>
+    <div className="card">
+      <h5 className="card-header">Surf Report</h5>
+      <div className="card-body">
+        <h5 className="card-title">{state.spotName}</h5>
+        <p>
+          <span>
+            surf height: {Math.round(state.surf.min)} -{" "}
+            {Math.round(state.surf.max)}ft{" "}
+          </span>
+          <span></span>
+        </p>
+        {state.swells.map((swell, index) => {
+          return (
+            <p key={index + 1} className="card-text">
+              {" "}
+              <span>swell {(index += 1)}: </span>{" "}
+              <span>{swell.height.toFixed(1)}ft </span>{" "}
+              <span>{direction(swell.direction)}</span>
+              <span>@{swell.period}s</span>
+            </p>
+          );
+        })}
+        <a href="#" className="btn btn-primary">
+          Go somewhere
+        </a>
+      </div>
     </div>
   );
 }

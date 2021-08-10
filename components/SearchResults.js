@@ -1,8 +1,9 @@
 import React from "react";
+import Link from "next/link";
 import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import axios from "axios";
-import { SimpleConsoleLogger, UsingJoinColumnIsNotAllowedError } from "typeorm";
+import { CURRENT_SWELL } from "../utils/Actions";
 
 function SearchResults() {
   const [state, dispatch] = useStoreContext();
@@ -10,6 +11,9 @@ function SearchResults() {
     const id = {
       spotId: e.target.getAttribute("data-id"),
     };
+
+    const spotName = e.target.textContent;
+    console.log("spotName", spotName);
 
     //make request for surfline
     const swell = await axios.post(`${server}/api/swells`, id);
@@ -45,6 +49,8 @@ function SearchResults() {
     let userTime = new Date().getHours();
 
     let swellObject = {
+      spotId: id.spotId,
+      spotName: spotName,
       swells: [],
       surf: {},
       currentWind: {},
@@ -54,6 +60,7 @@ function SearchResults() {
       },
     };
 
+    // match the swell info gor the user current time
     for (let i = 0; i < swells.length; i++) {
       if (userTime === swells[i].timestamp) {
         swellObject.swells = swells[i].swells.filter(
@@ -77,6 +84,7 @@ function SearchResults() {
       swellObject.swells.sort((a, b) => b.height - a.height);
     }
 
+    // mach the wind info to the users current time
     for (let i = 0; i < winds.length; i++) {
       if (userTime === winds[i].timestamp) {
         swellObject.currentWind = winds[i];
@@ -132,6 +140,10 @@ function SearchResults() {
       else if (tides[i].type === "LOW") currentTide.status === "low";
     }
 
+    dispatch({
+      type: CURRENT_SWELL,
+      swellObject: swellObject,
+    });
     console.log(swellObject);
 
     // Add wind to swell object, then it is ready to send to backend
@@ -141,18 +153,19 @@ function SearchResults() {
       {state.searchSpots.length > 0 ? (
         state.searchSpots.map((spot) => {
           return (
-            <div>
+            <div key={spot.name}>
               <p className="spot-results">
                 {" "}
-                <span
-                  key={spot.id}
-                  style={{ cursor: "pointer", color: "blue" }}
-                  onClick={(e) => getSwell(e)}
-                  data-id={spot.spotId}
-                >
-                  {" "}
-                  {spot.name}
-                </span>
+                <Link href="/Swell">
+                  <span
+                    style={{ cursor: "pointer", color: "blue" }}
+                    onClick={(e) => getSwell(e)}
+                    data-id={spot.spotId}
+                  >
+                    {" "}
+                    {spot.name}
+                  </span>
+                </Link>
               </p>{" "}
             </div>
           );
