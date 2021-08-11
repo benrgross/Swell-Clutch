@@ -36,10 +36,10 @@ function CurrentSwell() {
     return genDirrection;
   };
 
-  const surfScore = (surfMax, surfMin) => {
-    const averageSurf = (surfMax + surfMin) / 2;
-
-    return averageSurf;
+  const surfHeight = (min, max) => {
+    if (max === min) {
+      return Math.round(min);
+    } else return Math.round(min) + "-" + Math.round(max);
   };
 
   return (
@@ -48,10 +48,7 @@ function CurrentSwell() {
       <div className="card-body">
         <h5 className="card-title">{state.spotName}</h5>
         <p>
-          <span>
-            surf height: {Math.round(state.surf.min)} -{" "}
-            {Math.round(state.surf.max)}ft{" "}
-          </span>
+          <span>surf report: {surfHeight(state.surf.min, state.surf.max)}</span>
           <span></span>
         </p>
         {state.swells.map((swell, index) => {
