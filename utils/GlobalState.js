@@ -7,8 +7,8 @@ import {
   REGION,
   REGION2,
   REGION3,
-  SHOW_CURRENT_SWELL,
   CURRENT_SWELL,
+  SEARCHSPOT,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -49,8 +49,19 @@ const reducer = (state, action) => {
     case CURRENT_SWELL:
       return {
         ...state,
-        current_swell: action.currentSwell,
+        spotId: action.swellObject.spotId,
+        spotName: action.swellObject.spotName,
+        currentTide: action.swellObject.currentTide,
+        swells: action.swellObject.swells,
+        surf: action.swellObject.surf,
+        currentWind: action.swellObject.currentWind,
       };
+    case SEARCHSPOT:
+      return {
+        ...state,
+        searchSpots: action.spots,
+      };
+
     default:
       return state;
   }
@@ -62,31 +73,53 @@ const StoreProvider = ({ value = [], ...props }) => {
       lon: 0,
       lat: 0,
     },
+    searchSpots: [],
     locationStatus: "",
     timeStamp: "",
-    current_swell: [
-      {
-        swell_current: {
-          wind: "",
-          primarySwell: "",
-          secondarySwell: "",
-        },
+    spotId: "",
+    spotName: "",
+    swell: {
+      swell_current: {
+        wind: "",
+        primarySwell: "",
+        secondarySwell: "",
       },
-      {
-        tides_today: {
-          low: {
-            am_low: "",
-            pm_low: "",
-          },
-          high: { am_high: "", pm_high: "" },
-        },
+    },
+    currentTide: {
+      height: 0,
+      status: "null",
+    },
+    surf: {
+      min: 0,
+      max: 0,
+      optimalScore: 0,
+    },
+    currentWind: {
+      timeStamp: 0,
+      speed: 0,
+      direction: 0,
+      gust: 0,
+    },
+    tides: {
+      low: {
+        am_low_time: "",
+        am_low_ft: "",
+        pm_low_time: "",
+        pm_low_ft: "",
       },
-    ],
+      high: {
+        am_high_time: "",
+        am_high_ft: "",
+        pm_high_time: "",
+        pm_high_ft: "",
+      },
+    },
     swells: [],
     show_current_swell: false,
     region: "select",
     region2: "select",
     region3: "select",
+    currentTide: "",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

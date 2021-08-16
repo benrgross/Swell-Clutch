@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
 import { REGION } from "../utils/Actions";
 

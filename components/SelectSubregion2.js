@@ -1,12 +1,13 @@
 import React from "react";
 import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
-import { REGION3, CURRENT_SWELL } from "../utils/Actions";
+import { REGION3 } from "../utils/Actions";
 import axios from "axios";
 
 function SelectSubregion2() {
   const [state, dispatch] = useStoreContext();
 
+  //function that hits api when last subregion is selected and putz tide and swell into state
   const selectSubRegion2 = async (e) => {
     dispatch({
       type: REGION3,
@@ -17,12 +18,39 @@ function SelectSubregion2() {
       location: e.target.value,
     };
 
-    const { data } = await axios.post(`${server}/api/swellInfo`, forcast);
+    const { data } = await axios.post(`${server}/api/swellinfo`, forcast);
 
-    dispatch({
-      type: CURRENT_SWELL,
-      currentSwell: data,
-    });
+    //TODO: make new companent for search with this api search and display results
+
+    console.log(data);
+
+    //   const { low } = data[1].tides_today;
+    //   const { high } = data[1].tides_today;
+
+    //   const tide = {
+    //     low: {
+    //       am_low_time: low.am_low.substr(0, 8),
+    //       am_low_ft: low.am_low.substr(low.am_low.length - 4).replace(/\s+/g, ""),
+    //       pm_low_time: low.pm_low.substr(0, 8),
+    //       pm_low_ft: low.pm_low.substr(low.pm_low.length - 4).replace(/\s+/g, ""),
+    //     },
+    //     high: {
+    //       am_high_time: high.am_high.substr(0, 8),
+    //       am_high_ft: high.am_high
+    //         .substr(high.am_high.length - 4)
+    //         .replace(/\s+/g, ""),
+    //       pm_high_time: high.pm_high.substr(0, 8),
+    //       pm_high_ft: high.pm_high
+    //         .substr(high.pm_high.length - 4)
+    //         .replace(/\s+/g, ""),
+    //     },
+    //   };
+
+    //   dispatch({
+    //     type: CURRENT_SWELL,
+    //     currentSwell: data[0],
+    //     tides: tide,
+    //   });
   };
 
   switch (state.region2) {
