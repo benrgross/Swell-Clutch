@@ -1,6 +1,5 @@
 import React from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import axios from "axios";
 
 function GetSwellBtn() {
   const [state, dispatch] = useStoreContext();
