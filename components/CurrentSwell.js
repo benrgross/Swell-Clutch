@@ -39,7 +39,33 @@ function CurrentSwell() {
   const surfHeight = (min, max) => {
     if (max === min) {
       return Math.round(min);
-    } else return Math.round(min) + "-" + Math.round(max);
+    } else return min.toFixed(1) + "-" + max.toFixed(1);
+  };
+
+  const getWind = (wind) => {
+    let x = Math.round(wind.direction) / 22.5 + 0.5;
+    let arr = [
+      "N",
+      "NNE",
+      "NE",
+      "ENE",
+      "E",
+      "ESE",
+      "SE",
+      "SSE",
+      "S",
+      "SSW",
+      "SW",
+      "WSW",
+      "W",
+      "WNW",
+      "NW",
+      "NNW",
+    ];
+
+    let genDirrection = arr[Math.round(x % 16)];
+
+    return Math.round(wind.speed) + "kts" + " " + genDirrection;
   };
 
   return (
@@ -48,7 +74,9 @@ function CurrentSwell() {
       <div className="card-body">
         <h5 className="card-title">{state.spotName}</h5>
         <p>
-          <span>surf report: {surfHeight(state.surf.min, state.surf.max)}</span>
+          <span>
+            surf report: {surfHeight(state.surf.min, state.surf.max)}ft
+          </span>
           <span></span>
         </p>
         {state.swells.map((swell, index) => {
@@ -62,6 +90,9 @@ function CurrentSwell() {
             </p>
           );
         })}
+        <p>
+          <span>wind: {getWind(state.currentWind)}</span>
+        </p>
         <a href="#" className="btn btn-primary">
           Go somewhere
         </a>
