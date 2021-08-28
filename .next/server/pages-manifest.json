@@ -2,12 +2,11 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/": "pages/index.js",
+  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
   "/Search": "pages/Search.js",
   "/api/searchSpot": "pages/api/searchSpot.js",
-  "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
   "/Swell": "pages/Swell.js",
   "/api/swells": "pages/api/swells.js",
-  "/api/tides": "pages/api/tides.js",
-  "/api/winds": "pages/api/winds.js"
+  "/api/winds": "pages/api/winds.js",
+  "/api/tides": "pages/api/tides.js"
 }
