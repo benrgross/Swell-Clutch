@@ -29,7 +29,7 @@ const options = {
 
       // redirectUri:
       //   process.env.NEXT_PUBLIC_REDIRECT_URI ||
-      //   "http://localhost:3000/api/auth/callback/0auth",
+      //   "http://localhost:4000/api/auth/callback/0auth",
       // postLogoutRedirectUri:
       //   process.env.NEXT_PUBLIC_POST_LOGOUT_REDIRECT_URI ||
       //   "http://localhost:3000/",

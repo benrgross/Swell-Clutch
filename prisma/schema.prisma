@@ -3,7 +3,7 @@
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:chilmark144@localhost:3000/surfclutch"
+  url      = "postgresql://postgres:chilmark144@localhost:5432/surfclutch"
 }
 
 generator client {
