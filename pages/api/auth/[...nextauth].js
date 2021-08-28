@@ -29,7 +29,7 @@ const options = {
 
       // redirectUri:
       //   process.env.NEXT_PUBLIC_REDIRECT_URI ||
-      //   "http://localhost:3000/api/auth/callback/0auth",
+      //   "http://localhost:4000/api/auth/callback/0auth",
       // postLogoutRedirectUri:
       //   process.env.NEXT_PUBLIC_POST_LOGOUT_REDIRECT_URI ||
       //   "http://localhost:3000/",
@@ -77,6 +77,12 @@ const options = {
     },
   },
   adapter: PrismaAdapter(prisma),
+  callbacks: {
+    session: async (session, user) => {
+      session.id = user.id;
+      return Promise.resolve(session);
+    },
+  },
 };
 
 export default (req, res) => NextAuth(req, res, options);
