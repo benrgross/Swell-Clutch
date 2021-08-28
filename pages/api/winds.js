@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export default async function handler(req, res) {
-  console.log("req.body", req.body.spotId);
   if (req.method === "POST") {
     try {
       const { data } = await axios.get(
