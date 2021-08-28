@@ -49,8 +49,12 @@ const reducer = (state, action) => {
     case CURRENT_SWELL:
       return {
         ...state,
-        tides: action.tides,
-        swell: action.currentSwell,
+        spotId: action.swellObject.spotId,
+        spotName: action.swellObject.spotName,
+        currentTide: action.swellObject.currentTide,
+        swells: action.swellObject.swells,
+        surf: action.swellObject.surf,
+        currentWind: action.swellObject.currentWind,
       };
     case SEARCHSPOT:
       return {
@@ -72,6 +76,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     searchSpots: [],
     locationStatus: "",
     timeStamp: "",
+    spotId: "",
+    spotName: "",
     swell: {
       swell_current: {
         wind: "",
@@ -79,7 +85,21 @@ const StoreProvider = ({ value = [], ...props }) => {
         secondarySwell: "",
       },
     },
-
+    currentTide: {
+      height: 0,
+      status: "null",
+    },
+    surf: {
+      min: 0,
+      max: 0,
+      optimalScore: 0,
+    },
+    currentWind: {
+      timeStamp: 0,
+      speed: 0,
+      direction: 0,
+      gust: 0,
+    },
     tides: {
       low: {
         am_low_time: "",
@@ -94,7 +114,6 @@ const StoreProvider = ({ value = [], ...props }) => {
         pm_high_ft: "",
       },
     },
-
     swells: [],
     show_current_swell: false,
     region: "select",
