@@ -1,9 +1,13 @@
 import React, { useEffect } from "react";
 import { TIDE } from "../utils/Actions";
 import { useStoreContext } from "../utils/GlobalState";
+import { useSession } from "next-auth/client";
 
 function CurrentSwell() {
   const [state, dispatch] = useStoreContext();
+  const [session, loading] = useSession();
+
+  console.log(session);
 
   const { swell_current } = state.swell;
 
@@ -68,6 +72,11 @@ function CurrentSwell() {
     return Math.round(wind.speed) + "kts" + " " + genDirrection;
   };
 
+  const saveSwell = async () => {
+    console.log("click");
+    // algo get data object for storage, send to pisma to for save
+  };
+
   return (
     <div className="card">
       <h5 className="card-header">Surf Report</h5>
@@ -93,8 +102,8 @@ function CurrentSwell() {
         <p>
           <span>wind: {getWind(state.currentWind)}</span>
         </p>
-        <a href="#" className="btn btn-primary">
-          Go somewhere
+        <a onClick={saveSwell()} href="#" className="btn btn-primary">
+          Save Swell
         </a>
       </div>
     </div>
