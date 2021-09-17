@@ -9,11 +9,13 @@ function CurrentSwell() {
 
   console.log(session);
 
+  const swellArr = [];
+
   const { swell_current } = state.swell;
 
   const { tides } = state;
 
-  const direction = (direction) => {
+  const direction = (direction, height, period) => {
     console.log(Math.round(direction));
     let x = Number(Math.round(direction) / 22.5 + 0.5);
     console.log(x);
@@ -37,8 +39,24 @@ function CurrentSwell() {
     ];
     let genDirrection = arr[Math.round(x % 16)];
 
+    let swellSave = swellArr.push(
+      height +
+        "ft" +
+        +"," +
+        " " +
+        direction +
+        "deg" +
+        "," +
+        " " +
+        "@" +
+        period +
+        "s"
+    );
+
     return genDirrection;
   };
+
+  console.log(swellArr);
 
   const surfHeight = (min, max) => {
     if (max === min) {
@@ -73,6 +91,13 @@ function CurrentSwell() {
   };
 
   const saveSwell = async () => {
+    let swellObject = {};
+    swellArr.map((swell, i) => {
+      swellObject["swell" + (i + 1)] = swell;
+    });
+
+    console.log(swellObject);
+
     console.log("click");
     // algo get data object for storage, send to pisma to for save
   };
@@ -94,7 +119,9 @@ function CurrentSwell() {
               {" "}
               <span>swell {(index += 1)}: </span>{" "}
               <span>{swell.height.toFixed(1)}ft </span>{" "}
-              <span>{direction(swell.direction)}</span>
+              <span>
+                {direction(swell.direction, swell.height, swell.period)}
+              </span>
               <span>@{swell.period}s</span>
             </p>
           );
@@ -102,7 +129,7 @@ function CurrentSwell() {
         <p>
           <span>wind: {getWind(state.currentWind)}</span>
         </p>
-        <a onClick={saveSwell()} href="#" className="btn btn-primary">
+        <a onClick={() => saveSwell()} href="#" className="btn btn-primary">
           Save Swell
         </a>
       </div>
