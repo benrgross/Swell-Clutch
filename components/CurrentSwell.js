@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { server } from "../config";
 import { TIDE } from "../utils/Actions";
 import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
+import axios from "axios";
 
 function CurrentSwell() {
   const [state, dispatch] = useStoreContext();
@@ -10,6 +12,7 @@ function CurrentSwell() {
   console.log(session);
 
   const swellArr = [];
+  let windDir;
 
   const { swell_current } = state.swell;
 
@@ -86,25 +89,34 @@ function CurrentSwell() {
     ];
 
     let genDirrection = arr[Math.round(x % 16)];
-
-    return Math.round(wind.speed) + "kts" + " " + genDirrection;
+    windDir = Math.round(wind.speed) + "kts" + " " + genDirrection;
+    return windDir;
   };
 
   const saveSwell = async () => {
-    let swellObject = {};
+    let swellBody = {
+      userId: session.id,
+      spotName: state.spotName,
+      spotId: state.spotId,
+      wind: windDir,
+      tide: state.currentTide.height + "," + " " + state.currentTide.status,
+    };
     swellArr.map((swell, i) => {
-      swellObject["swell" + (i + 1)] = swell;
+      swellBody["swell" + (i + 1)] = swell;
     });
 
-    console.log(swellObject);
+    console.log(swellBody);
 
+    const saveSw = await axios.post(`${server}/api/saveSwell`, swellBody);
     console.log("click");
+
+    console.log(saveSw);
     // algo get data object for storage, send to pisma to for save
   };
 
   return (
     <div className="card">
-      <h5 className="card-header">Surf Report</h5>
+      <h5 className="card-header">Surf Reporst</h5>
       <div className="card-body">
         <h5 className="card-title">{state.spotName}</h5>
         <p>
@@ -128,6 +140,11 @@ function CurrentSwell() {
         })}
         <p>
           <span>wind: {getWind(state.currentWind)}</span>
+        </p>
+        <p>
+          <span>
+            tide: {state.currentTide.height}ft and {state.currentTide.status}
+          </span>
         </p>
         <a onClick={() => saveSwell()} href="#" className="btn btn-primary">
           Save Swell
