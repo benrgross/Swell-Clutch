@@ -10,6 +10,7 @@ module.exports = {
   env: {
     mongodburl: "Your MongoDB connection String",
   },
+  webpack5: false,
 };
 
 // module.exports = {
@@ -22,9 +23,9 @@ module.exports = {
 //   },
 // };
 
-module.exports = {
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Important: return the modified config
-    return config;
-  },
-};
+// module.exports = {
+//   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+//     // Important: return the modified config
+//     return config;
+//   },
+// };

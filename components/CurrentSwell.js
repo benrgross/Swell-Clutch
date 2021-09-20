@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { server } from "../config";
-import { TIDE } from "../utils/Actions";
 import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
@@ -59,7 +58,7 @@ function CurrentSwell() {
     return genDirrection;
   };
 
-  console.log(swellArr);
+  // console.log(swellArr);
 
   const surfHeight = (min, max) => {
     if (max === min) {
@@ -95,7 +94,6 @@ function CurrentSwell() {
 
   const saveSwell = async () => {
     let swellBody = {
-      userId: session.id,
       spotName: state.spotName,
       spotId: state.spotId,
       wind: windDir,
@@ -110,7 +108,6 @@ function CurrentSwell() {
     const saveSw = await axios.post(`${server}/api/saveSwell`, swellBody);
     console.log("click");
 
-    console.log(saveSw);
     // algo get data object for storage, send to pisma to for save
   };
 
@@ -146,9 +143,13 @@ function CurrentSwell() {
             tide: {state.currentTide.height}ft and {state.currentTide.status}
           </span>
         </p>
-        <a onClick={() => saveSwell()} href="#" className="btn btn-primary">
+        <button
+          onClick={() => saveSwell()}
+          href="#"
+          className="btn btn-primary"
+        >
           Save Swell
-        </a>
+        </button>
       </div>
     </div>
   );
