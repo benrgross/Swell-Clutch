@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useStoreContext } from "../utils/GlobalState";
-import { SET_LOCATION, LOCATION_STATUS } from "../utils/Actions";
+import { SET_LOCATION, LOCATION_STATUS, SET_USER } from "../utils/Actions";
 import { signIn, signOut, useSession } from "next-auth/client";
 import Head from "next/head";
 
@@ -11,6 +11,10 @@ export default function Home() {
   const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
+    dispatch({
+      type: SET_USER,
+      email: session.email,
+    });
     if (!navigator.geolocation) {
       dispatch({
         type: LOCATION_STATUS,

@@ -14,15 +14,10 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
-    "/Search": [
+    "/SavedSwells": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/Search.js"
-    ],
-    "/Swell": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/Swell.js"
+      "static/chunks/pages/SavedSwells.js"
     ],
     "/_app": [
       "static/chunks/webpack.js",

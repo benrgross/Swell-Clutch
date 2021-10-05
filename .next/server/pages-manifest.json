@@ -2,12 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Swell": "pages/Swell.js",
-  "/Search": "pages/Search.js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/swells": "pages/api/swells.js",
-  "/api/tides": "pages/api/tides.js",
-  "/api/winds": "pages/api/winds.js",
-  "/api/searchSpot": "pages/api/searchSpot.js",
-  "/api/saveSwell": "pages/api/saveSwell.js"
+  "/SavedSwells": "pages/SavedSwells.js"
 }
