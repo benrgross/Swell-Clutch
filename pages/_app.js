@@ -6,13 +6,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider session={pageProps.session}>
-      <StoreProvider>
+    <StoreProvider>
+      <Provider session={pageProps.session}>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </StoreProvider>
-    </Provider>
+      </Provider>
+    </StoreProvider>
   );
 }
 

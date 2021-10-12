@@ -3,6 +3,7 @@ import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
+import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 
 function CurrentSwell() {
   const [state, dispatch] = useStoreContext();
@@ -11,6 +12,7 @@ function CurrentSwell() {
   console.log(session);
 
   const swellArr = [];
+  console.log("swellArr", swellArr);
   let windDir;
 
   const { swell_current } = state.swell;
@@ -42,17 +44,7 @@ function CurrentSwell() {
     let genDirrection = arr[Math.round(x % 16)];
 
     let swellSave = swellArr.push(
-      height +
-        "ft" +
-        +"," +
-        " " +
-        direction +
-        "deg" +
-        "," +
-        " " +
-        "@" +
-        period +
-        "s"
+      height + "ft," + " " + direction + "deg" + "," + " " + "@" + period + "s"
     );
 
     return genDirrection;
@@ -95,18 +87,20 @@ function CurrentSwell() {
   const saveSwell = async () => {
     let swellBody = {
       spotName: state.spotName,
+      dateStr: new Date().toString(),
       spotId: state.spotId,
       wind: windDir,
       tide: state.currentTide.height + "," + " " + state.currentTide.status,
+      report: `${state.surf.min} - ${state.surf.max}`,
     };
     swellArr.map((swell, i) => {
       swellBody["swell" + (i + 1)] = swell;
     });
 
-    console.log(swellBody);
+    console.log("swellBody", swellBody);
 
-    const saveSw = await axios.post(`${server}/api/saveSwell`, swellBody);
-    console.log("click");
+    const saveSwell = await axios.post(`${server}/api/saveSwell`, swellBody);
+    console.log("saveSwell");
 
     // algo get data object for storage, send to pisma to for save
   };

@@ -19,6 +19,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/SavedSwells.js"
     ],
+    "/Swell": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Swell.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

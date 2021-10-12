@@ -65,8 +65,10 @@ model Swell {
   id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  dateStr   String?  @db.VarChar(255)
   spotName  String?   @db.VarChar(255)
   spotId    String?   @db.VarChar(255)
+  report    String?   @db.VarChar(255)
   notes     String?   @db.VarChar(255)
   swell1    String?  @db.VarChar(255)
   swell2    String?  @db.VarChar(255)

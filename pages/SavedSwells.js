@@ -1,16 +1,42 @@
 import React from "react";
+
 import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/client";
-
 import { useStoreContext } from "../utils/GlobalState";
-
+import SavedSwellCard from "../components/SavedSwellCard";
 import prisma from "../lib/prisma";
 
 function SavedSwells(props) {
-  console.log(props);
+  const swells = props.swellArr[0];
+  console.log(swells);
   const { data: session } = useSession();
   const [state, dispatch] = useStoreContext();
-  return <div>{props.swells}</div>;
+  return (
+    <div>
+      {swells.map(
+        (swell) => (
+          console.log(swell),
+          (
+            <SavedSwellCard
+              key={swell.spotId}
+              spotName={swell.spotName}
+              createdAt={swell.dateStr}
+              report={swell.report}
+              swell1={swell.swell1}
+              swell2={swell.swell2}
+              swell3={swell.swell3}
+              swell4={swell.swell4}
+              swell5={swell.swell5}
+              swell6={swell.swell6}
+              tide={swell.tide}
+              wind={swell.wind}
+              notes={swell.notes}
+            />
+          )
+        )
+      )}
+    </div>
+  );
 }
 
 export async function getServerSideProps(context) {
@@ -27,8 +53,9 @@ export async function getServerSideProps(context) {
   };
 
   swells.map((swell) => {
-    swell.createdAt.toString(), swell.updatedAt.toString();
+    swell.createdAt.toISOString(), swell.updatedAt.toISOString();
   });
+
   swellObj.swellArr.push(swells);
 
   return {

@@ -14,6 +14,8 @@ export default async function handle(req, res) {
         data: {
           spotId: req.body.spotId,
           spotName: req.body.spotName,
+          dateStr: req.body.dateStr,
+          report: req.body.report,
           swell1: req.body.swell1 || " ",
           swell2: req.body.swell2 || " ",
           swell3: req.body.swell3 || " ",

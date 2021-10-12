@@ -11,10 +11,13 @@ export default function Home() {
   const [state, dispatch] = useStoreContext();
 
   useEffect(() => {
-    dispatch({
-      type: SET_USER,
-      email: session.email,
-    });
+    if (session) {
+      dispatch({
+        type: SET_USER,
+        email: session.email,
+      });
+    }
+
     if (!navigator.geolocation) {
       dispatch({
         type: LOCATION_STATUS,
@@ -98,7 +101,6 @@ export default function Home() {
           <>
             signed in as {session.user.email} <br />
             <div>You can now access swell Clutch</div>
-            <div>{status}</div>
             <button onClick={getLocation}>Get Location</button>
           </>
         )}
