@@ -18,7 +18,8 @@ function SavedSwells(props) {
           console.log(swell),
           (
             <SavedSwellCard
-              key={swell.spotId}
+              key={swell.id}
+              id={swell.id}
               spotName={swell.spotName}
               createdAt={swell.dateStr}
               report={swell.report}

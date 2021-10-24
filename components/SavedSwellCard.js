@@ -1,4 +1,9 @@
 import React from "react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { server } from "../config";
+import { UsingJoinColumnOnlyOnOneSideAllowedError } from "typeorm";
+import next from "next";
 
 function SavedSwellCard({
   spotName,
@@ -14,11 +19,27 @@ function SavedSwellCard({
   wind,
   notes,
   spotId,
+  id,
 }) {
-  console.log(spotId, spotName);
+  const router = useRouter();
+  const deleteSwell = async (id) => {
+    const postId = await {
+      id: id,
+    };
+    const data = await axios.post(`${server}/api/deleteSwell`, postId);
+
+    if (data.status < 300) {
+      refreshData();
+    } else alert("Sorry something went wrong...");
+  };
+
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <div key={spotId}>
-      <div className="card" key={spotId}>
+      <div className="card" key={id}>
         <p>hello</p>
         <h5 className="card-header">{spotName}</h5>
         <div className="card-body">
@@ -28,19 +49,24 @@ function SavedSwellCard({
             <span></span>
           </p>
           <p> swell1: {swell1}</p>
-          {swell2 != " " ? <p>{swell2}</p> : ""}
-          {swell3 ? <p>swell3</p> : ""}
-          {swell4 ? <p>swell4</p> : ""}
-          {swell5 ? <p>swell5</p> : ""}
-          {swell6 ? <p>swell6</p> : ""}
+          {swell2 != " " ? <p>swell2: {swell2}</p> : ""}
+          {swell3 != " " ? <p>swell3 {swell3}</p> : ""}
+          {swell4 != " " ? <p>swell4 {swell4}</p> : ""}
+          {swell5 != " " ? <p>swell5 {swell5}</p> : ""}
+          {swell6 != " " ? <p>swell6 {swell6}</p> : ""}
           <p>
             <span>wind: {wind}</span>
           </p>
           <p>
             <span>tide: {tide}</span>
           </p>
-          <button href="#" className="btn btn-primary">
-            Update Swell
+
+          <button
+            value={id}
+            onClick={() => deleteSwell(id)}
+            className="btn btn-primary"
+          >
+            Delete Swell
           </button>
         </div>
       </div>

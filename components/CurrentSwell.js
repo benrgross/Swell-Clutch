@@ -43,7 +43,7 @@ function CurrentSwell() {
     ];
     let genDirrection = arr[Math.round(x % 16)];
 
-    let swellSave = swellArr.push(
+    swellArr.push(
       height + "ft," + " " + direction + "deg" + "," + " " + "@" + period + "s"
     );
 
@@ -121,11 +121,11 @@ function CurrentSwell() {
             <p key={index + 1} className="card-text">
               {" "}
               <span>swell {(index += 1)}: </span>{" "}
-              <span>{swell.height.toFixed(1)}ft </span>{" "}
+              <span>{swell.height.toFixed(1)}ft </span>
               <span>
                 {direction(swell.direction, swell.height, swell.period)}
               </span>
-              <span>@{swell.period}s</span>
+              <span> @{swell.period}s</span>
             </p>
           );
         })}
