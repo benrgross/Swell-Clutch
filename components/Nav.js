@@ -20,18 +20,27 @@ const Nav = () => {
                 Search
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link style={{ margin: "5px, 15px" }} href="/Swell">
                 Swell
               </Link>
-            </li>{" "}
+            </li>{" "} */}
             <li>
               <Link style={{ margin: "5px, 15px" }} href="/SavedSwells">
                 Your Swells
               </Link>
             </li>
             <li>
-              <a onClick={signOut} style={{ cursor: "pointer" }}>
+              <a
+                href="/"
+                onClick={signOut}
+                style={{
+                  margin: "5px, 15px",
+                  color: "#0d6efd",
+                  textDecoration: "underline",
+                  cursor: "pointer",
+                }}
+              >
                 Log Out
               </a>
             </li>

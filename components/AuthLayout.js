@@ -1,5 +1,4 @@
 import React from "react";
-import Locate from "./Locate";
 
 function AuthLayout({ children }) {
   return (
@@ -10,7 +9,6 @@ function AuthLayout({ children }) {
           <main className={styles.main}>
             <Header />
             {children}
-            <Locate />
           </main>
         </div>
       </>

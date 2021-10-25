@@ -2,6 +2,8 @@ import React from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { server } from "../config";
+import styles from "../styles/Home.module.css";
+
 import { UsingJoinColumnOnlyOnOneSideAllowedError } from "typeorm";
 import next from "next";
 
@@ -38,12 +40,12 @@ function SavedSwellCard({
   };
 
   return (
-    <div key={spotId}>
-      <div className="card" key={id}>
-        <p>hello</p>
+    <div key={spotId} className="col-lg-4 col-md-4 col-sm-4">
+      <div className={styles.card} key={id}>
+        <p>Swell</p>
         <h5 className="card-header">{spotName}</h5>
         <div className="card-body">
-          <h5 className="card-title">{dateStr}</h5>
+          <h5 className="card-title">date: {dateStr}</h5>
           <p>
             <span>surf report: {report}</span>
             <span></span>

@@ -12,30 +12,33 @@ function SavedSwells(props) {
   const { data: session } = useSession();
   const [state, dispatch] = useStoreContext();
   return (
-    <div>
-      {swells.map(
-        (swell) => (
-          console.log(swell),
-          (
-            <SavedSwellCard
-              key={swell.id}
-              id={swell.id}
-              spotName={swell.spotName}
-              createdAt={swell.dateStr}
-              report={swell.report}
-              swell1={swell.swell1}
-              swell2={swell.swell2}
-              swell3={swell.swell3}
-              swell4={swell.swell4}
-              swell5={swell.swell5}
-              swell6={swell.swell6}
-              tide={swell.tide}
-              wind={swell.wind}
-              notes={swell.notes}
-            />
+    <div className="savedCont">
+      <div className="row">
+        {swells.map(
+          (swell) => (
+            console.log(swell),
+            (
+              <SavedSwellCard
+                key={swell.id}
+                id={swell.id}
+                dateStr={swell.dateStr}
+                spotName={swell.spotName}
+                createdAt={swell.dateStr}
+                report={swell.report}
+                swell1={swell.swell1}
+                swell2={swell.swell2}
+                swell3={swell.swell3}
+                swell4={swell.swell4}
+                swell5={swell.swell5}
+                swell6={swell.swell6}
+                tide={swell.tide}
+                wind={swell.wind}
+                notes={swell.notes}
+              />
+            )
           )
-        )
-      )}
+        )}
+      </div>
     </div>
   );
 }
