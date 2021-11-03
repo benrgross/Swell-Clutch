@@ -24,6 +24,11 @@
       "static/chunks/main.js",
       "static/chunks/pages/SavedSwells.js"
     ],
+    "/Search": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/Search.js"
+    ],
     "/_app": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",

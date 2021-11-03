@@ -39,6 +39,8 @@ function SavedSwellCard({
     router.replace(router.asPath);
   };
 
+  // make list items similar to surfline app
+
   return (
     <div key={spotId} className="col-lg-4 col-md-4 col-sm-4">
       <div className={styles.card} key={id}>

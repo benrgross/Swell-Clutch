@@ -10,6 +10,8 @@ import {
   CURRENT_SWELL,
   SEARCHSPOT,
   SET_USER,
+  DISPLAYSPOT,
+  SELECTED_SPOT,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -66,6 +68,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.email,
+      };
+    }
+    case SELECTED_SPOT: {
+      return {
+        ...state,
+        displaySpot: false,
+        selectedSpot: action.spot,
       };
     }
 
@@ -128,6 +137,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     region3: "select",
     currentTide: "",
     email: "",
+    displaySpot: true,
+    selectedSpot: "",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;
