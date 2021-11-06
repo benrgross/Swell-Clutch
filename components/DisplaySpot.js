@@ -1,6 +1,7 @@
 import React from "react";
 import { SELECTED_SPOT } from "../utils/Actions";
 import { StoreProvider, useStoreContext } from "../utils/GlobalState";
+import spotStyles from "../styles/savedSpot.module.css";
 
 function DisplaySpot({ surfSpots }) {
   const [state, dispatch] = useStoreContext();
@@ -18,7 +19,11 @@ function DisplaySpot({ surfSpots }) {
     <div>
       <ul>
         {surfSpots.map((spot, i) => (
-          <li key={i} onClick={() => selectSpot(spot)}>
+          <li
+            className={spotStyles.spot}
+            key={i}
+            onClick={() => selectSpot(spot)}
+          >
             {spot}
           </li>
         ))}
