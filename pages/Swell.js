@@ -17,7 +17,6 @@ function Swell() {
         <>
           {" "}
           <CurrentSwell />
-          <SaveSwellBtn />
         </>
       )}
     </div>

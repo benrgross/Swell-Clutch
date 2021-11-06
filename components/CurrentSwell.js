@@ -6,6 +6,8 @@ import axios from "axios";
 import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 
 function CurrentSwell() {
+  // NOTES: add function to input notes and pictures.
+
   const [state, dispatch] = useStoreContext();
   const [session, loading] = useSession();
 

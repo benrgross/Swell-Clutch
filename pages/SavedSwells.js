@@ -3,21 +3,43 @@ import React from "react";
 import { GetServerSideProps } from "next";
 import { getSession, useSession } from "next-auth/client";
 import { useStoreContext } from "../utils/GlobalState";
+import DisplaySpot from "../components/DisplaySpot";
 import SavedSwellCard from "../components/SavedSwellCard";
 import prisma from "../lib/prisma";
 
 function SavedSwells(props) {
-  const swells = props.swellArr[0];
-  console.log(swells);
-  const { data: session } = useSession();
   const [state, dispatch] = useStoreContext();
+  const swells = props.swellArr[0];
+
+  const filteredSwells = swells.filter(
+    (swell) => swell.spotName === state.selectedSpot
+  );
+
+  console.log("filteredSwells", filteredSwells);
+
+  console.log(swells);
+  const spots = [];
+
+  swells.forEach((swell) => spots.push(swell.spotName));
+  console.log(spots);
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  const uniqueSpots = spots.filter(onlyUnique);
+
   return (
     <div className="savedCont">
-      <div className="row">
-        {swells.map(
-          (swell) => (
-            console.log(swell),
-            (
+      {state.displaySpot ? (
+        <div className="row">
+          <DisplaySpot surfSpots={uniqueSpots} />
+        </div>
+      ) : (
+        <div className="row">
+          {filteredSwells.map((swell) => (
+            <>
+              {/* <DisplaySpot /> */}
               <SavedSwellCard
                 key={swell.id}
                 id={swell.id}
@@ -35,10 +57,10 @@ function SavedSwells(props) {
                 wind={swell.wind}
                 notes={swell.notes}
               />
-            )
-          )
-        )}
-      </div>
+            </>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
