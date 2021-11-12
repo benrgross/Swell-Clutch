@@ -1,5 +1,7 @@
 import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
+import S3 from "../lib/AWS";
+import axios from "axios";
 
 function ImageUploader() {
   const handleChangeStatus = ({ meta, remove }, status) => {
@@ -9,16 +11,22 @@ function ImageUploader() {
     const f = files[0];
     console.log(f["file"]);
     // * GET request: presigned URL
-    const response = await axios({
-      method: "GET",
-      url: API_ENDPOINT,
-    });
+    const response = await axios.get(
+      `https://11k2bj0e8j.execute-api.us-east-2.amazonaws.com/default/getPresignedImageURL`
+    );
 
     console.log("Response: ", response);
 
     // * PUT request: upload file to S3
+
+    // follow youtube for https://www.youtube.com/watch?v=V45ymCXBpUM
+    // movie call to api backend.
+    // use the S3 client
     const result = await fetch(response.data.uploadURL, {
       method: "PUT",
+      headers: {
+        ContentType: "image/jpeg, image/png, image/heic, mov/mp4",
+      },
       body: f["file"],
     });
     console.log("Result: ", result);
