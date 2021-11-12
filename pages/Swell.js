@@ -14,10 +14,9 @@ function Swell() {
           <Link href="/">Please Sign In</Link>
         </div>
       ) : (
-        <>
-          {" "}
+        <div className="row">
           <CurrentSwell />
-        </>
+        </div>
       )}
     </div>
   );

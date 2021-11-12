@@ -4,6 +4,7 @@ import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
 import { UsingJoinColumnIsNotAllowedError } from "typeorm";
+import ImageUploader from "./ImageUploader";
 
 function CurrentSwell() {
   // NOTES: add function to input notes and pictures.
@@ -108,8 +109,8 @@ function CurrentSwell() {
   };
 
   return (
-    <div className="card">
-      <h5 className="card-header">Surf Reporst</h5>
+    <div className="card ">
+      <h5 className="card-header">Surf Report</h5>
       <div className="card-body">
         <h5 className="card-title">{state.spotName}</h5>
         <p>
@@ -139,6 +140,7 @@ function CurrentSwell() {
             tide: {state.currentTide.height}ft and {state.currentTide.status}
           </span>
         </p>
+        <ImageUploader />
         <button
           onClick={() => saveSwell()}
           href="#"
