@@ -2,6 +2,7 @@ import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
 import S3 from "../lib/AWS";
 import axios from "axios";
+// import server from "../config";
 
 function ImageUploader() {
   const handleChangeStatus = ({ meta, remove }, status) => {
@@ -10,6 +11,7 @@ function ImageUploader() {
   const handleSubmit = async (files) => {
     const f = files[0];
     console.log(f["file"]);
+
     // * GET request: presigned URL
     const response = await axios.get(
       `https://11k2bj0e8j.execute-api.us-east-2.amazonaws.com/default/getPresignedImageURL`
@@ -36,7 +38,7 @@ function ImageUploader() {
     const params = {
       Bucket: "swell-clutch",
       Key: fileName,
-      Expires: 500,
+      Expires: 604800,
     };
 
     const signedURL = S3.getSignedUrl("getObject", params);
