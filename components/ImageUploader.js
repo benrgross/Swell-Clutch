@@ -30,6 +30,18 @@ function ImageUploader() {
       body: f["file"],
     });
     console.log("Result: ", result);
+
+    const fileName = response.data.Key;
+
+    const params = {
+      Bucket: "swell-clutch",
+      Key: fileName,
+      Expires: 500,
+    };
+
+    const signedURL = S3.getSignedUrl("getObject", params);
+
+    console.log("url", signedURL);
   };
 
   return (

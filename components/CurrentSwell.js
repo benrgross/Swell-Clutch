@@ -3,6 +3,7 @@ import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
+import styles from "../styles/currentSwell.module.css";
 import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 import ImageUploader from "./ImageUploader";
 
