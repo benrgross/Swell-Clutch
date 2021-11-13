@@ -4,6 +4,7 @@ import S3 from "../lib/AWS";
 import axios from "axios";
 // import server from "../config";
 
+// get image from uploader
 function ImageUploader() {
   const handleChangeStatus = ({ meta, remove }, status) => {
     console.log(status, meta);
@@ -13,17 +14,10 @@ function ImageUploader() {
     console.log(f["file"]);
 
     // * GET request: presigned URL
-    const response = await axios.get(
-      `https://11k2bj0e8j.execute-api.us-east-2.amazonaws.com/default/getPresignedImageURL`
-    );
+    const response = await axios.get(process.env.NEXT_PUBLIC_API_ENDPOINT);
 
     console.log("Response: ", response);
-
-    // * PUT request: upload file to S3
-
-    // follow youtube for https://www.youtube.com/watch?v=V45ymCXBpUM
-    // movie call to api backend.
-    // use the S3 client
+    // store
     const result = await fetch(response.data.uploadURL, {
       method: "PUT",
       headers: {
@@ -44,6 +38,9 @@ function ImageUploader() {
     const signedURL = S3.getSignedUrl("getObject", params);
 
     console.log("url", signedURL);
+
+    // next steps are to store key or file path in back end.
+    // retrieve key, get signed URL
   };
 
   return (
