@@ -96,7 +96,10 @@ function CurrentSwell() {
       wind: windDir,
       tide: state.currentTide.height + "," + " " + state.currentTide.status,
       report: `${state.surf.min} - ${state.surf.max}`,
+      imageKey: state.imageKey,
     };
+
+    //IDEA: store swells as a comma seperated list and parse back together
     swellArr.map((swell, i) => {
       swellBody["swell" + (i + 1)] = swell;
     });

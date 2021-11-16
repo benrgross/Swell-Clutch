@@ -78,6 +78,7 @@ model Swell {
   swell6    String?   @db.VarChar(255)
   wind      String?   @db.VarChar(255)
   tide      String?   @db.VarChar(255)
+  imageKey  String?   @db.VarChar(255)
   account   User?    @relation(fields: [accountId], references: [id])
   accountId String?
 

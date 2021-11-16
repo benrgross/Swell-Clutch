@@ -12,6 +12,8 @@ import {
   SET_USER,
   DISPLAYSPOT,
   SELECTED_SPOT,
+  SIGNED_URL,
+  IMAGE_KEY,
 } from "../utils/Actions";
 
 const reducer = (state, action) => {
@@ -77,6 +79,18 @@ const reducer = (state, action) => {
         selectedSpot: action.spot,
       };
     }
+    case SIGNED_URL: {
+      return {
+        ...state,
+        signedURl: action.signedURl,
+      };
+    }
+    case IMAGE_KEY: {
+      return {
+        ...state,
+        imageKey: action.key,
+      };
+    }
 
     default:
       return state;
@@ -139,6 +153,8 @@ const StoreProvider = ({ value = [], ...props }) => {
     email: "",
     displaySpot: true,
     selectedSpot: "",
+    imageKey: "",
+    signedURl: "",
   });
 
   return <Provider value={[state, dispatch]} {...props} />;

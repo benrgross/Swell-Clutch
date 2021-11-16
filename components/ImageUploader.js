@@ -2,22 +2,22 @@ import "react-dropzone-uploader/dist/styles.css";
 import Dropzone from "react-dropzone-uploader";
 import S3 from "../lib/AWS";
 import axios from "axios";
-// import server from "../config";
+import { IMAGE_KEY, SIGNED_URL } from "../utils/Actions";
+import { useStoreContext } from "../utils/GlobalState";
 
 // get image from uploader
 function ImageUploader() {
+  const [state, dispatch] = useStoreContext();
   const handleChangeStatus = ({ meta, remove }, status) => {
     console.log(status, meta);
   };
   const handleSubmit = async (files) => {
     const f = files[0];
-    console.log(f["file"]);
 
     // * GET request: presigned URL
     const response = await axios.get(process.env.NEXT_PUBLIC_API_ENDPOINT);
 
-    console.log("Response: ", response);
-    // store
+    // store the photo in s3 bucket
     const result = await fetch(response.data.uploadURL, {
       method: "PUT",
       headers: {
@@ -25,7 +25,6 @@ function ImageUploader() {
       },
       body: f["file"],
     });
-    console.log("Result: ", result);
 
     const fileName = response.data.Key;
 
@@ -35,12 +34,21 @@ function ImageUploader() {
       Expires: 604800,
     };
 
-    const signedURL = S3.getSignedUrl("getObject", params);
+    // get signed URL
+    const signedURL = await S3.getSignedUrl("getObject", params);
 
     console.log("url", signedURL);
 
-    // next steps are to store key or file path in back end.
-    // retrieve key, get signed URL
+    //store key and url in global state
+    dispatch({
+      type: IMAGE_KEY,
+      key: fileName,
+    });
+
+    dispatch({
+      type: SIGNED_URL,
+      signedURL: signedURL,
+    });
   };
 
   return (
