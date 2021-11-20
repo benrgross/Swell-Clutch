@@ -112,6 +112,7 @@ function CurrentSwell() {
     // algo get data object for storage, send to pisma to for save
   };
 
+  // make a switch for displaying image on card once submitted
   return (
     <div className="card ">
       <h5 className="card-header">Surf Report</h5>
