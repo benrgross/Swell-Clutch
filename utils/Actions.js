@@ -15,3 +15,5 @@ export const TIDE = "TIDE";
 export const SEARCHSPOT = "SEARCHSPOT";
 export const DISPLAYSPOT = "DISPLAYSPOT";
 export const SELECTED_SPOT = "SELECTED_SPOT";
+export const SIGNED_URL = "SIGNED_URL";
+export const IMAGE_KEY = "IMAGE_KEY";

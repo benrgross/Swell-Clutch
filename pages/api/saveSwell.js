@@ -25,6 +25,7 @@ export default async function handle(req, res) {
           wind: req.body.wind,
           tide: req.body.tide,
           notes: req.body.notes || " ",
+          imageKey: req.body.imageKey || "",
           account: { connect: { email: session?.user?.email } },
         },
       });

@@ -3,7 +3,9 @@ import { server } from "../config";
 import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
+import styles from "../styles/currentSwell.module.css";
+import ImageUploader from "./ImageUploader";
+import Image from "next/image";
 
 function CurrentSwell() {
   // NOTES: add function to input notes and pictures.
@@ -94,7 +96,10 @@ function CurrentSwell() {
       wind: windDir,
       tide: state.currentTide.height + "," + " " + state.currentTide.status,
       report: `${state.surf.min} - ${state.surf.max}`,
+      imageKey: state.imageKey,
     };
+
+    //IDEA: store swells as a comma seperated list and parse back together
     swellArr.map((swell, i) => {
       swellBody["swell" + (i + 1)] = swell;
     });
@@ -107,9 +112,10 @@ function CurrentSwell() {
     // algo get data object for storage, send to pisma to for save
   };
 
+  // make a switch for displaying image on card once submitted
   return (
-    <div className="card">
-      <h5 className="card-header">Surf Reporst</h5>
+    <div className="card ">
+      <h5 className="card-header">Surf Report</h5>
       <div className="card-body">
         <h5 className="card-title">{state.spotName}</h5>
         <p>
@@ -139,6 +145,12 @@ function CurrentSwell() {
             tide: {state.currentTide.height}ft and {state.currentTide.status}
           </span>
         </p>
+        {state.imageKey == "" ? (
+          <ImageUploader />
+        ) : (
+          <Image src={state.imageKey} width={100} height={100} />
+        )}
+
         <button
           onClick={() => saveSwell()}
           href="#"
