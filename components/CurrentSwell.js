@@ -4,8 +4,8 @@ import { useStoreContext } from "../utils/GlobalState";
 import { useSession } from "next-auth/client";
 import axios from "axios";
 import styles from "../styles/currentSwell.module.css";
-import { UsingJoinColumnIsNotAllowedError } from "typeorm";
 import ImageUploader from "./ImageUploader";
+import Image from "next/image";
 
 function CurrentSwell() {
   // NOTES: add function to input notes and pictures.
@@ -145,7 +145,12 @@ function CurrentSwell() {
             tide: {state.currentTide.height}ft and {state.currentTide.status}
           </span>
         </p>
-        <ImageUploader />
+        {state.imageKey == "" ? (
+          <ImageUploader />
+        ) : (
+          <Image src={state.imageKey} width={100} height={100} />
+        )}
+
         <button
           onClick={() => saveSwell()}
           href="#"

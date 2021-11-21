@@ -28,27 +28,29 @@ function ImageUploader() {
 
     const fileName = response.data.Key;
 
-    const params = {
-      Bucket: "swell-clutch",
-      Key: fileName,
-      Expires: 604800,
-    };
+    const imageSrc = `https://swell-clutch.s3.us-east-2.amazonaws.com/${fileName}`;
 
-    // get signed URL
-    const signedURL = await S3.getSignedUrl("getObject", params);
-
-    console.log("url", signedURL);
-
-    //store key and url in global state
     dispatch({
       type: IMAGE_KEY,
-      key: fileName,
+      key: imageSrc,
     });
 
-    dispatch({
-      type: SIGNED_URL,
-      signedURL: signedURL,
-    });
+    // dispatch({
+    //   type: SIGNED_URL,
+    //   signedURL: signedURL,
+    // });
+
+    //SIGNED URL CALL
+    // const params = {
+    //   Bucket: "swell-clutch",
+    //   Key: fileName,
+    //   Expires: 604800,
+    // };
+
+    // // get signed URL
+    // const signedURL = await S3.getSignedUrl("getObject", params);
+
+    //store key and url in global state
   };
 
   return (

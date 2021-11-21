@@ -7,10 +7,9 @@ module.exports = withCSS({
 });
 
 module.exports = {
-  env: {
-    mongodburl: "Your MongoDB connection String",
+  images: {
+    domains: ["swell-clutch.s3.us-east-2.amazonaws.com"],
   },
-  webpack5: false,
 };
 
 // module.exports = {
