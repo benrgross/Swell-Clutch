@@ -28,7 +28,7 @@ const options = {
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
       domain: process.env.AUTH0_DOMAIN,
       scope: "openid profile",
-      redirectUri: `${server}/api/auth/callback/0auth`,
+      redirectUri: `${server}/api/auth/callback/auth0`,
       postLogoutRedirectUri: server,
       session: {
         // The secret used to encrypt the cookie.
