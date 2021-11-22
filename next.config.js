@@ -21,13 +21,13 @@ module.exports = (phase) => {
   return {
     env: {
       REDIRECT_URI: isDev
-        ? "http://localhost:3000/api/callback"
-        : "https://example.org/api/callback",
+        ? "http://localhost:3000/api/callback/auth0"
+        : "https://swell-clutch.vercel.app/api/callback/auth0",
       POST_LOGOUT_REDIRECT_URI: isDev
         ? "http://localhost:3000/secret"
-        : "https://example.org/secret",
+        : "https://swell-clutch.vercel.app/secret",
       AUTH0_SCOPE: "openid profile",
-      SERVER_URL: isDev ? "http://localhost:3000" : "https://example.org",
+      SERVER_URL: isDev ? "http://localhost:3000" : "https://swell-clutch.vercel.app/,
     },
   };
 };
