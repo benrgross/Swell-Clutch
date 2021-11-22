@@ -2,6 +2,8 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import prisma from "../../../lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { server } from "../../../config";
+
 import { PrismaClient } from "@prisma/client";
 
 const options = {
@@ -25,13 +27,9 @@ const options = {
       clientId: process.env.AUTH0_CLIENT_ID,
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
       domain: process.env.AUTH0_DOMAIN,
-
-      // redirectUri:
-      //   process.env.NEXT_PUBLIC_REDIRECT_URI ||
-      //   "http://localhost:4000/api/auth/callback/0auth",
-      // postLogoutRedirectUri:
-      //   process.env.NEXT_PUBLIC_POST_LOGOUT_REDIRECT_URI ||
-      //   "http://localhost:3000/",
+      scope: "openid profile",
+      redirectUri: `${server}/api/auth/callback/0auth`,
+      postLogoutRedirectUri: server,
       session: {
         // The secret used to encrypt the cookie.
         cookieSecret: process.env.COOKIE_SECRET,

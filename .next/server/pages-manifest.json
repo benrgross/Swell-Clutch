@@ -2,6 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/Swell": "pages/Swell.js",
-  "/Search": "pages/Search.js"
+  "/next/dist/pages/_error": "pages/next/dist/pages/_error.js",
+  "/Swell": "pages/Swell.js"
 }
