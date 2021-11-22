@@ -63,8 +63,8 @@ export default async function handler(req, res) {
       );
 
       res.json(results);
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.log(err);
     }
   }
 }
