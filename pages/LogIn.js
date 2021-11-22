@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import axios from "axios";
+import { server } from "../config";
 
 function LogIn(e) {
   e.preventDefault;
@@ -23,7 +24,7 @@ function LogIn(e) {
     //   body: JSON.stringify(creds),
     // });
 
-    const res = await axios.post("/api/logIn", creds);
+    const res = await axios.post(`${serer}/api/logIn`, creds);
 
     console.log(res.status);
   };
