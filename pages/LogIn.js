@@ -24,7 +24,7 @@ function LogIn(e) {
     //   body: JSON.stringify(creds),
     // });
 
-    const res = await axios.post(`${serer}/api/logIn`, creds);
+    const res = await axios.post(`${server}/api/logIn`, creds);
 
     console.log(res.status);
   };
