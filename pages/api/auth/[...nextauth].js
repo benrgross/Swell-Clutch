@@ -27,7 +27,7 @@ const options = {
       clientId: process.env.AUTH0_CLIENT_ID,
       clientSecret: process.env.AUTH0_CLIENT_SECRET,
       domain: process.env.AUTH0_DOMAIN,
-      scope: "openid profile",
+      // scope: "openid profile",
       redirectUri: `${server}/api/auth/callback/auth0`,
       postLogoutRedirectUri: server,
       session: {
