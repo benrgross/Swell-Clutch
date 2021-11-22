@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       res.json({ msg: "Something went wrong" });
     }
   } else {
-    console.log("uhoh");
+    console.log("ohman");
   }
 }
 
