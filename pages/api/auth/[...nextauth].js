@@ -1,10 +1,11 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import prisma from "../../../lib/prisma";
+// import prisma from "../../../lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { server } from "../../../config";
-
 import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
 
 const options = {
   providers: [
@@ -47,7 +48,18 @@ const options = {
   database: {
     type: "postgres",
     database: "surfclutch",
-    synchronize: true,
+    // synchronize: true,
+    debug: true,
+  },
+
+  options: {
+    callback: {
+      signIn(user, account, profile) {
+        user.name = slug(user.email.slice(0, user.email.indexOf("@"))); // or whatever else
+
+        return true;
+      },
+    },
   },
 
   events: {
@@ -73,7 +85,7 @@ const options = {
       /* error in authentication flow */
     },
   },
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter([prisma]),
   callbacks: {
     session: async (session, user) => {
       session.id = user.id;

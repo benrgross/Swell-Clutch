@@ -1,14 +1,15 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = "postgresql://postgres:chilmark144@localhost:5432/surfclutch"
 }
 
-generator client {
-  provider = "prisma-client-js"
-}
 
 model Account {
   id                 String    @id @default(cuid())
@@ -66,19 +67,19 @@ model Swell {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   dateStr   String?  @db.VarChar(255)
-  spotName  String?   @db.VarChar(255)
-  spotId    String?   @db.VarChar(255)
-  report    String?   @db.VarChar(255)
-  notes     String?   @db.VarChar(255)
+  spotName  String?  @db.VarChar(255)
+  spotId    String?  @db.VarChar(255)
+  report    String?  @db.VarChar(255)
+  notes     String?  @db.VarChar(255)
   swell1    String?  @db.VarChar(255)
   swell2    String?  @db.VarChar(255)
   swell3    String?  @db.VarChar(255)
-  swell4    String?   @db.VarChar(255)
-  swell5    String?   @db.VarChar(255)
-  swell6    String?   @db.VarChar(255)
-  wind      String?   @db.VarChar(255)
-  tide      String?   @db.VarChar(255)
-  imageKey  String?   @db.VarChar(255)
+  swell4    String?  @db.VarChar(255)
+  swell5    String?  @db.VarChar(255)
+  swell6    String?  @db.VarChar(255)
+  wind      String?  @db.VarChar(255)
+  tide      String?  @db.VarChar(255)
+  imageKey  String?  @db.VarChar(255)
   account   User?    @relation(fields: [accountId], references: [id])
   accountId String?
 
