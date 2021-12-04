@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 // import prisma from "../../../lib/prisma";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import Adapters from "next-auth/adapters";
 import { server } from "../../../config";
 import { PrismaClient } from "@prisma/client";
 
@@ -52,15 +53,15 @@ const options = {
     debug: true,
   },
 
-  options: {
-    callback: {
-      signIn(user, account, profile) {
-        user.name = slug(user.email.slice(0, user.email.indexOf("@"))); // or whatever else
+  // options: {
+  //   callback: {
+  //     signIn(user, account, profile) {
+  //       user.name = slug(user.email.slice(0, user.email.indexOf("@"))); // or whatever else
 
-        return true;
-      },
-    },
-  },
+  //       return true;
+  //     },
+  //   },
+  // },
 
   events: {
     async signIn(message) {
@@ -85,7 +86,7 @@ const options = {
       /* error in authentication flow */
     },
   },
-  adapter: PrismaAdapter([prisma]),
+  adapter: Adapters.Prisma.Adapter({ prisma }),
   callbacks: {
     session: async (session, user) => {
       session.id = user.id;
